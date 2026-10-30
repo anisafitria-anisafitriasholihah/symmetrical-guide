@@ -4,18 +4,18 @@
 <title>Dunia Bangun Ruang 3D</title>
 <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
-:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#9fd8ff;--card:#fff7e6;--ink:#3e2610;--w1:#c9904f;--w2:#8a5526;--wa:#d9a566;--wb:#b9803f}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#a2d2ff;--card:#fff9ee;--ink:#3e2610;--w1:#c9904f;--w2:#8a5526;--wa:#d9a566;--wb:#b9803f}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d2b3a;--card:#3a2a1a;--ink:#fbeed6;--wa:#7a4e28;--wb:#5a3818}}
 :root[data-theme="dark"]{--bg:#1d2b3a;--card:#3a2a1a;--ink:#fbeed6;--wa:#7a4e28;--wb:#5a3818}
 *{box-sizing:border-box}html,body{margin:0}
-body{font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);min-height:100%;background:var(--bg) radial-gradient(rgba(255,255,255,.45) 3px,transparent 3px) 0 0/30px 30px}
-.wrap{max-width:1000px;margin:auto;padding:10px}
-.board{background:linear-gradient(var(--w1),var(--w2));border-radius:18px;padding:12px;color:#fff8e1;border:4px solid #5e3a17;text-align:center;box-shadow:0 5px 0 #5e3a17}
-.btn{font:800 1.1rem 'Baloo 2',system-ui;border:0;border-bottom:5px solid rgba(0,0,0,.28);border-radius:16px;padding:8px 16px;color:#fff;cursor:pointer;margin:3px}
-.btn:active{transform:translateY(3px);border-bottom-width:2px}.btn:disabled{opacity:.45}
-.b1{background:#2f80ed}.b2{background:#27ae60}.b3{background:#f2994a}.b4{background:#eb5757}.b5{background:#9b51e0}
-.card{background:var(--card);border-radius:18px;padding:12px;border:4px solid var(--w2)}
-#stage{position:relative;height:min(60vh,430px);border-radius:18px;border:6px solid #7a4a1d;background:linear-gradient(#8fd3ff,#e6f6ff 62%,#8de06f 62%);overflow:hidden;touch-action:none}
+body{font-family:'Baloo 2',system-ui,sans-serif;color:var(--ink);min-height:100%;background:var(--bg) radial-gradient(rgba(255,255,255,.5) 3px,transparent 3px) 0 0/32px 32px}
+.wrap{max-width:1080px;margin:auto;padding:10px}
+.board{background:linear-gradient(var(--w1),var(--w2));border-radius:20px;padding:12px;color:#fff8e1;border:4px solid #5e3a17;text-align:center;box-shadow:0 6px 0 #5e3a17}
+.btn{font:800 1.1rem 'Baloo 2',system-ui;border:0;border-bottom:5px solid rgba(0,0,0,.28);border-radius:16px;padding:8px 16px;color:#fff;cursor:pointer;margin:3px;transition:all .15s ease}
+.btn:hover{transform:translateY(-2px)}.btn:active{transform:translateY(3px);border-bottom-width:2px}.btn:disabled{opacity:.45}
+.b1{background:#2f80ed}.b2{background:#27ae60}.b3{background:#f2994a}.b4{background:#eb5757}.b5{background:#9b51e0}.b6{background:#ff4757}.b7{background:#00cec9}
+.card{background:var(--card);border-radius:20px;padding:14px;border:4px solid var(--w2);box-shadow:0 6px 14px rgba(0,0,0,.1)}
+#stage{position:relative;height:min(58vh,420px);border-radius:18px;border:6px solid #7a4a1d;background:linear-gradient(#8fd3ff,#e6f6ff 62%,#8de06f 62%);overflow:hidden;touch-action:none}
 canvas{width:100%;height:100%;display:block}
 .grid{display:grid;grid-template-columns:1.15fr 1fr;gap:12px;margin-top:10px}
 @media(max-width:760px){.grid{grid-template-columns:1fr}}
@@ -23,43 +23,88 @@ canvas{width:100%;height:100%;display:block}
 .chip{font:800 1rem 'Baloo 2';border:3px solid #fff;border-radius:14px;padding:4px 12px;color:#fff;cursor:pointer;border-bottom:5px solid rgba(0,0,0,.3)}
 .chip.on{box-shadow:0 0 0 4px #ffe66d;transform:scale(1.08)}
 .hide{display:none!important}
-.ctl{display:flex;flex-wrap:wrap;gap:2px;align-items:center;justify-content:center;margin-top:6px}
+.ctl{display:flex;flex-wrap:wrap;gap:4px;align-items:center;justify-content:center;margin-top:6px}
 input[type=range]{flex:1;min-width:140px;accent-color:#27ae60}
+.pb{padding:5px 12px;font-size:.95rem}.pb.on{box-shadow:0 0 0 4px #ffe66d;background:#27ae60!important}
+#pn{text-align:center;font-weight:800;min-height:1.6em;color:#7a4a1d;margin-top:4px}
 #info{background:linear-gradient(#f7dfae,#e8bd78);border:6px solid #7a4a1d;border-radius:16px;padding:12px;color:#3b2210;box-shadow:inset 0 0 0 3px #fbe9c4}
 #info h2{margin:0 0 4px;font-style:italic;font-size:1.7rem;color:#8a3b0f}
 #info p{margin:4px 0}#info ul{margin:4px 0;padding-left:20px;font-weight:600}#info li{margin:3px 0}
 .f{background:#fff;color:#222;border-radius:10px;padding:6px 10px;margin:6px 0;font-weight:700;border-left:6px solid #27ae60}
-.f small{display:block;color:#8a3b0f}
+.f small{display:block;color:#8a3b0f;font-size:.85rem}
 .calc label{display:inline-block;margin:3px 6px 3px 0;font-weight:700}
-.calc input{width:70px;font:700 1rem 'Baloo 2';border-radius:8px;border:2px solid var(--w2);padding:2px 6px}
+.calc input,.calc select{font:700 1rem 'Baloo 2';border-radius:8px;border:2px solid var(--w2);padding:2px 8px;background:#fff}
+.calc input{width:90px}
 .opt{display:block;width:100%;text-align:left;margin:6px 0;font-size:1.1rem}
-/* cover */
+.opt.ok,.ok{background:#27ae60!important}.opt.bad,.bad{background:#555!important}
+.ic{text-align:center;margin:6px 0}
+
+/* Header & Cover Styling */
 .cover{position:relative;overflow:hidden;border:6px solid #5e3a17;border-radius:24px;padding:18px;background:repeating-linear-gradient(90deg,var(--wa) 0 110px,var(--wb) 110px 113px);box-shadow:0 8px 0 #5e3a17;display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:center;min-height:540px}
 @media(max-width:760px){.cover{grid-template-columns:1fr}}
-.sign{background:linear-gradient(#e7b36b,#c68a46);border:6px solid #7a4a1d;border-radius:16px;padding:12px;text-align:center;box-shadow:inset 0 0 0 3px #f3cf92,0 6px 0 rgba(0,0,0,.25);position:relative;z-index:1}
-.sm{font:800 1.5rem 'Baloo 2';color:#c62828;letter-spacing:3px;text-shadow:0 2px 0 #fff}
-.ttl span{display:inline-block;font:800 clamp(2.1rem,9vw,3.8rem)/1 'Baloo 2';-webkit-text-stroke:5px #fff;paint-order:stroke fill;text-shadow:0 5px 0 rgba(0,0,0,.3);animation:bn 1.6s ease-in-out infinite}
-@keyframes bn{50%{transform:translateY(-8px)}}
+.sign{background:linear-gradient(#f9d48b,#d69248);border:6px solid #7a4a1d;border-radius:20px;padding:16px;text-align:center;box-shadow:inset 0 0 0 3px #ffe1a6,0 6px 0 rgba(0,0,0,.25);position:relative;z-index:1}
+.sm{font:800 1.3rem 'Baloo 2';color:#b71c1c;letter-spacing:2px;text-shadow:0 2px 0 #fff;background:#ffeaa7;display:inline-block;padding:2px 14px;border-radius:20px;border:2px solid #7a4a1d;margin-bottom:6px}
+
+.title-container{display:flex;flex-direction:column;align-items:center;justify-content:center;margin:4px 0}
+.title-line{display:inline-flex;justify-content:center;align-items:center;white-space:nowrap;letter-spacing:1px}
+.title-letter{font:800 clamp(2.2rem,8.5vw,3.6rem)/1.1 'Baloo 2';-webkit-text-stroke:4px #fff;paint-order:stroke fill;text-shadow:0 4px 0 rgba(0,0,0,.25);display:inline-block;animation:bn 1.8s ease-in-out infinite}
+
+@keyframes bn{50%{transform:translateY(-6px)}}
 @keyframes wg{50%{transform:rotate(6deg) translateY(-6px)}}
 @keyframes fl{50%{transform:translateY(-14px) rotate(20deg)}}
-.name{display:inline-block;margin-top:8px;background:#ffe66d;color:#4a2c12;border-radius:999px;padding:3px 18px;font-weight:800;border:3px solid #7a4a1d}
-.win{border:10px solid #7a4a1d;border-radius:10px;overflow:hidden;box-shadow:0 6px 0 rgba(0,0,0,.25);line-height:0}
-.win svg{width:100%;height:250px}.cl{animation:dr 9s ease-in-out infinite alternate}@keyframes dr{to{transform:translateX(34px)}}#mus{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:20;border-radius:50%;width:54px;height:54px;padding:0;font-size:1.6rem;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+@keyframes tr{from{transform:scale(1) rotate(-8deg)}to{transform:scale(1.25) rotate(8deg)}}
+.name{display:inline-block;margin-top:10px;background:#ffe66d;color:#4a2c12;border-radius:999px;padding:4px 18px;font-weight:800;border:3px solid #7a4a1d;box-shadow:0 3px 0 rgba(0,0,0,.15)}
+.win{border:10px solid #7a4a1d;border-radius:14px;overflow:hidden;box-shadow:0 6px 0 rgba(0,0,0,.25);line-height:0}
+.win svg{width:100%;height:250px}
+.cl{animation:dr 9s ease-in-out infinite alternate}@keyframes dr{to{transform:translateX(34px)}}
 .mas{display:flex;justify-content:space-around;margin-top:10px}
 .mas svg{width:30%;max-width:105px;animation:wg 2s ease-in-out infinite}.mas svg:nth-child(2){animation-delay:.4s}.mas svg:nth-child(3){animation-delay:.8s}
 .blks{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}
-.blk{font:800 1.6rem 'Baloo 2';color:#fff;border:0;border-radius:14px;padding:10px 26px;cursor:pointer;border-bottom:8px solid rgba(0,0,0,.3);text-shadow:0 2px 0 rgba(0,0,0,.3)}
+.blk{font:800 clamp(1.05rem,3.8vw,1.3rem) 'Baloo 2';color:#fff;border:0;border-radius:16px;padding:10px 18px;cursor:pointer;border-bottom:8px solid rgba(0,0,0,.3);text-shadow:0 2px 0 rgba(0,0,0,.3)}
 .blk:active{transform:translateY(5px);border-bottom-width:3px}
 .fx{position:absolute;font-size:1.8rem;animation:fl 3s ease-in-out infinite;opacity:.9;pointer-events:none}
+#mus{position:fixed;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:20;border-radius:50%;width:54px;height:54px;padding:0;font-size:1.6rem;box-shadow:0 4px 10px rgba(0,0,0,.35)}
+
+/* Canva Style Container */
+.canva-box{background:linear-gradient(135deg,#fffbf0 0%,#ffeedd 100%);border:5px solid #ff7f50;border-radius:24px;padding:22px;box-shadow:0 12px 24px rgba(0,0,0,.15);position:relative;overflow:hidden}
+.canva-title{font-size:2.1rem;font-weight:800;color:#e84118;text-shadow:2px 2px 0 #fff;margin-bottom:12px;text-align:center}
+.p-input-group{display:flex;gap:15px;justify-content:center;flex-wrap:wrap;margin:16px 0}
+.p-card{background:#fff;border-radius:18px;padding:15px 20px;border:4px solid;box-shadow:0 6px 0 rgba(0,0,0,.1);flex:1;min-width:240px;max-width:320px}
+.p-card.p1{border-color:#ff4757;background:#fff0f2}.p-card.p2{border-color:#2ed573;background:#f0fff4}
+.p-card label{display:block;font-weight:800;font-size:1.2rem;margin-bottom:8px}
+.p-card input{width:100%;font:800 1.2rem 'Baloo 2';padding:8px 12px;border-radius:12px;border:3px solid #ccc;outline:none;text-align:center}
+
+/* Versus Interface */
+.mt{display:flex;height:28px;border-radius:14px;overflow:hidden;border:3px solid #5e3a17;background:#ccc}
+.mt div{transition:width .5s;color:#fff;font-weight:800;text-align:center;line-height:22px;overflow:hidden}
+.vsg{display:grid;gap:10px;margin-top:10px;grid-template-columns:1fr 1fr;grid-template-areas:"q q" "a b"}
+@media(max-width:760px){.vsg{grid-template-columns:1fr;grid-template-areas:"a" "q" "b"}}
+#vq{grid-area:q}#pl0{grid-area:a}#pl1{grid-area:b}
+.pl{border-radius:18px;padding:10px;border:5px solid;color:#3e2610}
+.pl.r{background:#ffe3e3;border-color:#eb5757}.pl.u{background:#e0eeff;border-color:#2f80ed}
+.flip{transform:rotate(180deg)}
+.tb{height:10px;background:#ddd;border-radius:6px;overflow:hidden;margin-top:6px}
+.tb i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#27ae60,#f2c94c,#eb5757);transition:width .1s linear}
+.vend{text-align:center}.troph{display:inline-block;font-size:5.5rem;animation:tr .8s ease-in-out infinite alternate}
+.sc2{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.sc2>div{border-radius:16px;padding:10px 22px;color:#fff;font-weight:800;border-bottom:6px solid rgba(0,0,0,.3);min-width:160px}
+.diag-img{display:flex;justify-content:center;align-items:center;margin:8px 0}
+.diag-img svg{max-width:100%;height:auto}
+
+/* Wordwall Canvas Game */
+#catcherCanvas{width:100%;height:380px;background:linear-gradient(#87ceeb,#e0f6ff 68%,#7bed9f 68%);border-radius:18px;border:5px solid #7a4a1d;display:block;touch-action:none;box-shadow:0 6px 12px rgba(0,0,0,.15)}
 </style></head><body><div class="wrap">
 
 <div id="home" class="screen">
  <div class="cover">
   <span class="fx" style="left:3%;top:4%">⭐</span><span class="fx" style="left:48%;top:3%;animation-delay:.6s">✨</span><span class="fx" style="right:4%;top:48%;animation-delay:1.2s">🔷</span><span class="fx" style="left:6%;bottom:6%;animation-delay:.9s">🔺</span><span class="fx" style="right:44%;bottom:3%;animation-delay:1.5s">🟡</span>
   <div>
-   <div class="sign"><div class="sm">SIMULASI</div><div class="ttl" id="ttl"></div>
-    <div style="font-weight:700;color:#4a2c12">Media Pembelajaran Matematika 3D untuk Sekolah Dasar</div>
-    <div class="name">✏️ Dibuat oleh: Anisa Fitria Sholihah</div></div>
+   <div class="sign">
+    <div class="sm">MEDIA INTERAKTIF</div>
+    <div class="title-container" id="ttl"></div>
+    <div style="font-weight:800;color:#4a2c12;margin-top:6px;font-size:1.05rem">Pembelajaran Matematika 3D Sekolah Dasar</div>
+    <div class="name">✏️ Oleh: Anisa Fitria Sholihah (NIM: 2024030008)</div>
+   </div>
    <div class="mas">
     <svg viewBox="0 0 100 100"><polygon points="50,6 92,26 50,46 8,26" fill="#7fb0ff"/><polygon points="8,26 50,46 50,94 8,72" fill="#2f5fe0"/><polygon points="50,46 92,26 92,72 50,94" fill="#1f46b8"/><circle cx="22" cy="55" r="7" fill="#fff"/><circle cx="38" cy="62" r="7" fill="#fff"/><circle cx="23" cy="56" r="3.5"/><circle cx="39" cy="63" r="3.5"/><path d="M22 73Q30 81 40 77" stroke="#fff" stroke-width="3" fill="none"/></svg>
     <svg viewBox="0 0 100 100"><polygon points="50,4 90,84 10,84" fill="#2ecc71"/><ellipse cx="50" cy="84" rx="40" ry="11" fill="#27ae60"/><circle cx="40" cy="56" r="7" fill="#fff"/><circle cx="60" cy="56" r="7" fill="#fff"/><circle cx="41" cy="57" r="3.5"/><circle cx="61" cy="57" r="3.5"/><path d="M42 70Q50 77 58 70" stroke="#145a32" stroke-width="3" fill="none"/></svg>
@@ -68,15 +113,21 @@ input[type=range]{flex:1;min-width:140px;accent-color:#27ae60}
   </div>
   <div>
    <div class="win"><svg viewBox="0 0 300 230" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="sk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4fb8ff"/><stop offset="1" stop-color="#e3f6ff"/></linearGradient></defs><rect width="300" height="230" fill="url(#sk)"/><g fill="none" stroke-width="6"><path d="M20 150A110 110 0 0 1 240 150" stroke="#ff5252"/><path d="M26 150A104 104 0 0 1 234 150" stroke="#ff9800"/><path d="M32 150A98 98 0 0 1 228 150" stroke="#ffd600"/><path d="M38 150A92 92 0 0 1 222 150" stroke="#4caf50"/><path d="M44 150A86 86 0 0 1 216 150" stroke="#2196f3"/></g><circle cx="250" cy="40" r="24" fill="#ffe14d"/><circle cx="243" cy="36" r="3"/><circle cx="257" cy="36" r="3"/><path d="M242 46Q250 54 258 46" stroke="#c77700" stroke-width="2.5" fill="none"/><g class="cl"><ellipse cx="60" cy="38" rx="30" ry="11" fill="#fff"/><ellipse cx="86" cy="32" rx="22" ry="10" fill="#fff"/></g><g class="cl" style="animation-delay:-5s"><ellipse cx="190" cy="20" rx="26" ry="9" fill="#fff"/></g><path d="M110 62q6-7 12 0q6-7 12 0M170 82q5-6 10 0q5-6 10 0" stroke="#37474f" stroke-width="2" fill="none"/><path d="M0 160Q60 110 130 155T300 135V230H0Z" fill="#6bbf59"/><path d="M0 190Q90 150 180 188T300 170V230H0Z" fill="#43a047"/><rect x="32" y="150" width="7" height="24" fill="#8d5524"/><circle cx="36" cy="142" r="17" fill="#2e7d32"/><rect x="252" y="158" width="7" height="22" fill="#8d5524"/><circle cx="256" cy="150" r="15" fill="#388e3c"/><polygon points="95,156 112,164 95,172 78,164" fill="#7fb0ff"/><polygon points="78,164 95,172 95,192 78,184" fill="#2f5fe0"/><polygon points="95,172 112,164 112,184 95,192" fill="#1f46b8"/><circle cx="84" cy="173" r="3" fill="#fff"/><circle cx="91" cy="176" r="3" fill="#fff"/><circle cx="84.5" cy="173.5" r="1.4"/><circle cx="91.5" cy="176.5" r="1.4"/><polygon points="140,148 160,190 120,190" fill="#2ecc71"/><ellipse cx="140" cy="190" rx="20" ry="5" fill="#27ae60"/><circle cx="134" cy="174" r="3" fill="#fff"/><circle cx="146" cy="174" r="3" fill="#fff"/><circle cx="134.5" cy="174.5" r="1.4"/><circle cx="146.5" cy="174.5" r="1.4"/><circle cx="190" cy="178" r="15" fill="#e53935"/><circle cx="185" cy="175" r="3" fill="#fff"/><circle cx="195" cy="175" r="3" fill="#fff"/><circle cx="185.5" cy="175.5" r="1.4"/><circle cx="195.5" cy="175.5" r="1.4"/><path d="M150 0V230M0 115H300" stroke="#7a4a1d" stroke-width="9"/><rect x="62" y="84" width="176" height="34" rx="10" fill="#ffd54f" stroke="#7a4a1d" stroke-width="4"/><text x="150" y="108" text-anchor="middle" font-family="Baloo 2,sans-serif" font-weight="800" font-size="19" fill="#c62828">AYO BELAJAR! ✨</text><rect y="214" width="300" height="16" fill="#7a4a1d"/><path d="M22 214l4-16h14l4 16z" fill="#c0392b"/><circle cx="33" cy="192" r="7" fill="#ff5eaa"/><circle cx="33" cy="192" r="3" fill="#ffe14d"/><path d="M256 214l4-16h14l4 16z" fill="#c0392b"/><circle cx="267" cy="192" r="7" fill="#ffd600"/><circle cx="267" cy="192" r="3" fill="#e53935"/></svg></div>
-   <div class="blks"><button class="blk" style="background:#2f80ed" onclick="go('mat')">📘 MATERI</button><button class="blk" style="background:#27ae60" onclick="go('quiz');startQ()">🎮 KUIS SERU</button></div>
+   <div class="blks">
+    <button class="blk" style="background:#2f80ed" onclick="go('mat')">📘 EKSPLORASI MATERI</button>
+    <button class="blk" style="background:#27ae60" onclick="go('quiz');startQ()">🧩 PETUALANGAN JELAJAH RUANG</button>
+    <button class="blk" style="background:#eb5757" onclick="go('vs_setup')">⚔️ TANDING DUO JUARA</button>
+    <button class="blk" style="background:#9b51e0" onclick="go('wordwall')">🎮 POJOK GAME WORDWALL</button>
+   </div>
    <div style="text-align:center;margin-top:10px"><span class="name" style="background:#fff">Ayo kita mulai petualangannya, Sahabat Ruang! 🚀</span></div>
   </div>
  </div>
 </div>
 
+<!-- Materi Screen -->
 <div id="mat" class="screen hide">
   <div class="board" style="padding:8px"><button class="btn b4" style="float:left;padding:4px 14px" onclick="go('home')">⬅ Menu</button>
-  <b style="font-size:1.3rem">Klik bangun ruang yang ingin kamu pelajari!</b></div>
+  <b style="font-size:1.3rem">Pilih Bangun Ruang yang Ingin Kamu Pelajari! ✨</b></div>
   <div class="chips" id="chips"></div>
   <div class="grid">
     <div>
@@ -89,29 +140,111 @@ input[type=range]{flex:1;min-width:140px;accent-color:#27ae60}
         <button class="btn b1" onclick="spin=!spin">Putar Otomatis</button>
         <button class="btn b1" onclick="zoom(-1)">＋</button><button class="btn b1" onclick="zoom(1)">－</button>
       </div>
-      <div class="ctl"><span>Jaring-jaring</span><input id="sl" type="range" min="0" max="100" value="100"><span>Bangun</span></div>
+      <div class="ctl"><span>Jaring-jaring</span><input id="sl" type="range" min="0" max="100" value="100"><span>Bangun Utuh</span></div>
+      <div class="ctl" id="pats" style="max-height:110px;overflow-y:auto"></div><div id="pn"></div>
       <div class="card" style="margin-top:6px;text-align:center">Geser layar untuk memutar 360°. Scroll atau tombol ＋ － untuk zoom.</div>
     </div>
     <div id="info"></div>
   </div>
 </div>
 
+<!-- Petualangan Jelajah Ruang (Kuis Solo) -->
 <div id="quiz" class="screen hide">
   <div class="board" style="padding:8px"><button class="btn b4" style="float:left;padding:4px 14px" onclick="go('home')">⬅ Menu</button>
-  <b style="font-size:1.3rem">Temukan jawaban yang tepat, Sahabat Ruang!</b></div>
+  <b style="font-size:1.3rem">🧩 Petualangan Jelajah Ruang: Jawab Soal & Kumpulkan Bintang!</b></div>
   <div class="card" id="qbox" style="margin-top:10px"></div>
+</div>
+
+<!-- Setup Screen untuk Duo Game -->
+<div id="vs_setup" class="screen hide">
+  <div class="board" style="padding:8px"><button class="btn b4" style="float:left;padding:4px 14px" onclick="go('home')">⬅ Menu</button>
+  <b style="font-size:1.3rem">⚔️ Persiapan Tanding Duo Juara</b></div>
+  <div class="canva-box" style="margin-top:15px">
+    <div class="canva-title">Masukkan Nama & Jumlah Soal! 🎮</div>
+    <div class="p-input-group">
+      <div class="p-card p1">
+        <label style="color:#ff4757">🔴 PEMAIN 1 (Kiri/Atas)</label>
+        <input type="text" id="p1_name" value="Pemain 1" maxlength="12">
+        <small style="display:block;margin-top:6px;color:#888;text-align:center">Tombol Keyboard: A - S - D - F</small>
+      </div>
+      <div class="p-card p2">
+        <label style="color:#2ed573">🔵 PEMAIN 2 (Kanan/Bawah)</label>
+        <input type="text" id="p2_name" value="Pemain 2" maxlength="12">
+        <small style="display:block;margin-top:6px;color:#888;text-align:center">Tombol Keyboard: J - K - L - ;</small>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:10px">
+      <label style="font-weight:800;font-size:1.1rem;color:#3e2610">Pilih Berapa Ronde Soal: </label>
+      <select id="vs_rounds" style="font:800 1.1rem 'Baloo 2';padding:4px 12px;border-radius:10px;border:3px solid #7a4a1d">
+        <option value="5">5 Soal Cepat</option>
+        <option value="10" selected>10 Soal Standar</option>
+        <option value="15">15 Soal Tantangan</option>
+        <option value="20">20 Soal Marathon</option>
+      </select>
+    </div>
+    <div style="text-align:center;margin-top:18px">
+      <button class="btn b2" style="font-size:1.4rem;padding:12px 36px" onclick="startVS()">Mulai Tandingan! 🚀</button>
+    </div>
+  </div>
+</div>
+
+<!-- Versus Arena Screen -->
+<div id="vs" class="screen hide">
+  <div class="board" style="padding:8px"><button class="btn b4" style="float:left;padding:4px 14px" onclick="go('home')">⬅ Menu</button>
+  <b style="font-size:1.3rem">⚔️ Tanding Duo Juara: Siapa Cepat Dia Dapat!</b></div>
+  <div id="vsgame">
+    <div class="mt" style="margin-top:10px"><div id="m0" style="width:50%;background:#eb5757"></div><div id="m1" style="width:50%;background:#2f80ed"></div></div>
+    <div style="display:flex;justify-content:space-between;align-items:center;font-weight:800;flex-wrap:wrap;margin-top:6px">
+      <span style="color:#eb5757">🔴 <span id="label_p1">Pemain 1</span>: <b id="sc0">0</b> poin</span>
+      <button class="btn b5" style="padding:2px 10px;font-size:.9rem" onclick="$('#pl0').classList.toggle('flip')">↻ Putar Panel 1</button>
+      <span style="color:#2f80ed"><span id="label_p2">Pemain 2</span>: <b id="sc1">0</b> poin 🔵</span>
+    </div>
+    <div class="vsg">
+      <div class="card" id="vq"></div>
+      <div class="pl r" id="pl0"><b id="box_p1">🔴 PEMAIN 1</b> <small>(tombol A S D F)</small><div id="vp0"></div></div>
+      <div class="pl u" id="pl1"><b id="box_p2">🔵 PEMAIN 2</b> <small>(tombol J K L ;)</small><div id="vp1"></div></div>
+    </div>
+  </div>
+  <div id="vsend" class="hide card vend" style="margin-top:10px"></div>
+</div>
+
+<!-- Wordwall Mini-Games Screen -->
+<div id="wordwall" class="screen hide">
+  <div class="board" style="padding:8px"><button class="btn b4" style="float:left;padding:4px 14px" onclick="go('home')">⬅ Menu</button>
+  <b style="font-size:1.3rem">🎮 Pojok Game Wordwall: Game Keranjang 2 Menit!</b></div>
+  <div class="card" id="ww_box" style="margin-top:10px"></div>
 </div>
 
 </div>
 <button id="mus" class="btn b5" onclick="toggleMus()" title="Musik">🔇</button>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 const $=s=>document.querySelector(s),f=x=>String(+x.toFixed(2)).replace('.',',');
-function go(id){document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('hide',e.id!=id));if(id=='mat'){rs();if(!cur)pick('kubus')}}
-(function(){const C=['#ff5252','#ff9800','#ffd600','#4caf50','#2196f3','#9c27b0'];let k=0;
- $('#ttl').innerHTML=['DUNIA','BANGUN RUANG'].map(w=>'<div>'+[...w].map(c=>c==' '?'<span style="width:.35em;-webkit-text-stroke:0"> </span>':`<span style="color:${C[k%6]};animation-delay:${(k++)*.12}s">${c}</span>`).join('')+'</div>').join('')})();
+let vs=null, catcherLoopId=null;
 
-/* ===== 3D ===== */
+function go(id){
+  if(vs&&id!='vs'){vs.stop=1;clearInterval(vs.tm)}
+  if(catcherLoopId){cancelAnimationFrame(catcherLoopId);catcherLoopId=null}
+  document.querySelectorAll('.screen').forEach(e=>e.classList.toggle('hide',e.id!=id));
+  if(id=='mat'){rs();if(!cur)pick('kubus')}
+  if(id=='wordwall'){initCatcherGame()}
+}
+
+/* Header Title Generator */
+(function(){
+  const colors=['#e74c3c','#e67e22','#f1c40f','#2ecc71','#3498db','#9b51e0'];let cIdx=0;
+  function makeLine(str){
+    return '<div class="title-line">'+[...str].map(ch=>{
+      if(ch===' ')return '<span style="width:0.3em;display:inline-block"></span>';
+      const col=colors[(cIdx++)%colors.length];
+      return `<span class="title-letter" style="color:${col}">${ch}</span>`;
+    }).join('')+'</div>';
+  }
+  $('#ttl').innerHTML = makeLine("DUNIA") + makeLine("BANGUN RUANG");
+})();
+
+/* ===== 3D ENGINE ===== */
 let R,sc,cam,root,inner,cur,T=1,tg=1,spin=true,drag=0,lx,ly,wf=false,slice=false,mats=[];
 const cv=$('#cv');
 try{R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true})}catch(e){$('#stage').innerHTML='<p style="padding:20px">Browser kamu belum mendukung 3D (WebGL).</p>'}
@@ -120,7 +253,7 @@ sc.add(new THREE.AmbientLight(0xffffff,.65));const dl=new THREE.DirectionalLight
 root=new THREE.Group();inner=new THREE.Group();root.add(inner);sc.add(root);root.rotation.x=.7}
 function rs(){if(!R)return;const p=cv.parentElement,w=p.clientWidth,h=p.clientHeight;if(!w)return;R.setSize(w,h,false);cam.aspect=w/h;cam.updateProjectionMatrix()}
 addEventListener('resize',rs);
-function zoom(d){cam.position.z=Math.max(8,Math.min(30,cam.position.z+d*1.5))}
+function zoom(d){cam.position.z=Math.max(8,Math.min(36,cam.position.z+d*1.5))}
 cv.onpointerdown=e=>{drag=1;lx=e.clientX;ly=e.clientY;cv.setPointerCapture(e.pointerId)};
 cv.onpointermove=e=>{if(!drag)return;root.rotation.y+=(e.clientX-lx)*.01;root.rotation.x=Math.max(-1.5,Math.min(1.5,root.rotation.x+(e.clientY-ly)*.01));lx=e.clientX;ly=e.clientY};
 cv.onpointerup=cv.onpointercancel=()=>drag=0;
@@ -131,38 +264,108 @@ const mat=c=>{const m=new THREE.MeshLambertMaterial({color:c,side:2});mats.push(
 function applyWf(){mats.forEach(m=>{m.transparent=wf;m.opacity=wf?.25:1;m.depthWrite=!wf;m.needsUpdate=true})}
 const lnm=new THREE.LineBasicMaterial({color:0x14213d});
 function dm(geo,c,par){const m=new THREE.Mesh(geo,mat(c));m.add(new THREE.LineSegments(new THREE.EdgesGeometry(geo),lnm));par.add(m);return m}
-function mk(p2,c,par){const g=new THREE.ShapeGeometry(new THREE.Shape(p2.map(q=>new THREE.Vector2(q[0],q[1]))));g.rotateX(Math.PI/2);return dm(g,c,par)}
-const rect=(w,d)=>[[w/2,-d/2],[-w/2,-d/2],[-w/2,d/2],[w/2,d/2]];
-const tri=L=>{const r=L/Math.sqrt(3);return[0,1,2].map(k=>[r*Math.cos(-2*Math.PI*k/3),r*Math.sin(-2*Math.PI*k/3)])};
 const bm=c=>new THREE.MeshBasicMaterial({color:c,side:2});
-/* mata lucu; up=1: menempel di sisi luar sisi yang terlipat */
-function eyes(par,cx,cz,s,up){const g=new THREE.Group();g.position.set(cx,up?0:cz,up?cz:0);if(up)g.rotation.x=Math.PI/2;g.scale.setScalar(s);
+function eyes(par,cx,cy,s,up){const g=new THREE.Group();g.position.set(cx,up?0:cy,up?cy:0);if(up)g.rotation.x=Math.PI/2;g.scale.setScalar(s);
   [-.55,.55].forEach(x=>{const w=new THREE.Mesh(new THREE.CircleGeometry(.42,24),bm(0xffffff));w.position.set(x,.1,.02);
     const p=new THREE.Mesh(new THREE.CircleGeometry(.22,20),bm(0x222222));p.position.set(x+.04,.08,.04);g.add(w,p)});
-  const m=new THREE.Mesh(new THREE.TorusGeometry(.35,.05,6,16,Math.PI),bm(0x222222));m.rotation.z=Math.PI;m.position.set(0,-.35,.03);g.add(m);par.add(g)}
+  const m=new THREE.Mesh(new THREE.TorusGeometry(.35,.05,6,16,Math.PI),bm(0x222222));m.rotation.z=Math.PI;m.position.set(0,-.35,.03);g.add(m);par.add(g);return g}
+function eyesF(o,q){const xs=q.map(a=>a[0]),ys=q.map(a=>a[1]),x0=Math.min(...xs),x1=Math.max(...xs),y0=Math.min(...ys),y1=Math.max(...ys),t=q.length==3;
+  const e=eyes(o,(x0+x1)/2,t?ys.reduce((a,b)=>a+b)/3+.15:(y0+y1)/2,Math.min(x1-x0,y1-y0)/(t?4:3.4),0),e2=e.clone();e2.rotation.y=Math.PI;o.add(e2)}
 
-/* kubus, balok, prisma, limas: alas + sisi-sisi berengsel */
-function poly(pts,H,apex,col){
-  const g=new THREE.Group(),hs=[],n=pts.length;mk(pts,col,g);
-  let fi=0,best=-9;pts.forEach((P,i)=>{const Q=pts[(i+1)%n],v=(Q[0]-P[0])/Math.hypot(Q[0]-P[0],Q[1]-P[1]);if(v>best){best=v;fi=i}});
-  pts.forEach((P,i)=>{const Q=pts[(i+1)%n],ex=Q[0]-P[0],ez=Q[1]-P[1],L=Math.hypot(ex,ez);
-    const h=new THREE.Group();h.rotation.order='YXZ';h.position.set(P[0],0,P[1]);h.rotation.y=Math.atan2(-ez,ex);g.add(h);let max;
-    if(apex){const a=L/2,sl=Math.hypot(a,H);mk([[0,0],[L,0],[a,sl]],col,h);max=Math.PI-Math.atan2(H,a);if(i==fi)eyes(h,a,sl*.3,.8,1)}
-    else{mk([[0,0],[L,0],[L,H],[0,H]],col,h);max=Math.PI/2;if(i==fi)eyes(h,L/2,H*.55,Math.min(L,H)/3.2,1);
-      if(i==0){const c=new THREE.Group();c.position.set(0,0,H);h.add(c);
-        const ux=ex/L,uz=ez/L,nx=-uz,nz=ux;
-        mk(pts.map(Z=>{const dx=Z[0]-P[0],dz=Z[1]-P[1];return[dx*ux+dz*uz,-(dx*nx+dz*nz)]}),col,c);hs.push([c,Math.PI/2])}}
-    hs.push([h,max])});
-  return{g,H,set:t=>hs.forEach(([o,m])=>o.rotation.x=-m*t)}}
+/* ===== Mesin Jaring-Jaring Umum ===== */
+function mkPoly(V,Fi,col,H,nets){
+  const V3=THREE.Vector3,M4=THREE.Matrix4,ctr=V.reduce((a,v)=>a.add(v),new V3()).divideScalar(V.length),up=new V3(0,1,0);
+  const F=Fi.map(ix=>{const p=ix.map(i=>V[i].clone()),n=new V3().crossVectors(p[1].clone().sub(p[0]),p[2].clone().sub(p[1])).normalize(),
+      m=p.reduce((a,v)=>a.add(v),new V3()).divideScalar(p.length);
+    if(n.dot(m.clone().sub(ctr))<0){p.reverse();n.negate()}
+    let e1,e2;
+    if(Math.abs(n.y)>.99){e1=p[1].clone().sub(p[0]).normalize();e2=new V3().crossVectors(n,e1)}
+    else{e2=up.clone().sub(n.clone().multiplyScalar(up.dot(n))).normalize();e1=new V3().crossVectors(e2,n)}
+    const Mx=new M4().makeBasis(e1,e2,n).setPosition(p[0]);
+    return{p,n,M:Mx,Mi:Mx.clone().invert(),q:p.map(v=>{const d=v.clone().sub(p[0]);return[d.dot(e1),d.dot(e2)]})}});
+  let ef=0,bz=-9;F.forEach((o,i)=>{if(Math.abs(o.n.y)<.99&&o.n.z>bz){bz=o.n.z;ef=i}});
+  const g=new THREE.Group();let hs=[];
+  const idx=(C,v)=>C.p.findIndex(w=>w.distanceTo(v)<1e-4);
+  function build(k){
+    while(g.children.length)g.remove(g.children[0]);mats.length=0;hs=[];const net=nets[k][1];
+    const fg=F.map((o,i)=>{const gr=new THREE.Group();gr.matrixAutoUpdate=false;
+      dm(new THREE.ShapeGeometry(new THREE.Shape(o.q.map(a=>new THREE.Vector2(a[0],a[1])))),col,gr);if(i==ef)eyesF(gr,o.q);return gr});
+    fg[net.root].matrix.copy(F[net.root].M);g.add(fg[net.root]);
+    net.pairs.forEach(([pi,ci])=>{const P=F[pi],C=F[ci],n=P.p.length;let a=0,b=1,ac=0,bc=1;
+      for(let i=0;i<n;i++){const j=(i+1)%n,x=idx(C,P.p[i]),y=idx(C,P.p[j]);if(x>=0&&y>=0){a=i;b=j;ac=x;bc=y;break}}
+      const Ap=P.q[a],Bp=P.q[b],Ac=C.q[ac],Bc=C.q[bc],
+        al=Math.atan2(Bp[1]-Ap[1],Bp[0]-Ap[0])-Math.atan2(Bc[1]-Ac[1],Bc[0]-Ac[0]),
+        C0=new M4().makeTranslation(Ap[0],Ap[1],0).multiply(new M4().makeRotationZ(al)).multiply(new M4().makeTranslation(-Ac[0],-Ac[1],0)),
+        m=new V3(0,0,1).transformDirection(P.Mi.clone().multiply(C.M)),u=new V3(Bp[0]-Ap[0],Bp[1]-Ap[1],0).normalize(),
+        th=Math.atan2(u.dot(new V3(0,0,1).cross(m)),m.z);
+      fg[pi].add(fg[ci]);hs.push({o:fg[ci],A:Ap,u,th,C0})});
+    applyWf()}
+  const set=t=>hs.forEach(h=>{h.o.matrix.copy(new M4().makeTranslation(h.A[0],h.A[1],0).multiply(new M4().makeRotationAxis(h.u,h.th*t)).multiply(new M4().makeTranslation(-h.A[0],-h.A[1],0)).multiply(h.C0))});
+  build(0);return{g,H,set,nets,pat:build}}
 
-/* tabung & kerucut: selimut melengkung dihitung tiap frame */
+function gridNet(rows){
+  const cells=[];rows.forEach((s,r)=>[...s].forEach((ch,c)=>{if(ch=='X')cells.push([r,c])}));
+  const k=(r,c)=>r+','+c,has=new Set(cells.map(x=>k(x[0],x[1]))),rc=cells[0],
+    st={[k(rc[0],rc[1])]:{B:0,T:1,F:2,K:3,L:4,R:5}},q=[rc],pairs=[];
+  const roll={'0,1':s=>({B:s.R,T:s.L,R:s.T,L:s.B,F:s.F,K:s.K}),'0,-1':s=>({B:s.L,T:s.R,L:s.T,R:s.B,F:s.F,K:s.K}),
+    '1,0':s=>({B:s.F,T:s.K,F:s.T,K:s.B,L:s.L,R:s.R}),'-1,0':s=>({B:s.K,T:s.F,K:s.T,F:s.B,L:s.L,R:s.R})};
+  while(q.length){const[r,c]=q.shift(),s=st[k(r,c)];
+    for(const d in roll){const dd=d.split(',').map(Number),nr=r+dd[0],nc=c+dd[1];
+      if(has.has(k(nr,nc))&&!st[k(nr,nc)]){const ns=roll[d](s);st[k(nr,nc)]=ns;pairs.push([s.B,ns.B]);q.push([nr,nc])}}}
+  return{root:0,pairs}}
+
+/* 11 Pola Jaring-Jaring Kubus Unik & Lengkap (6 Persegi) */
+const CUBEN11=[
+  ['Jaring-Jaring 1 (Pola 1-4-1 Salib)',[".X..","XXXX",".X.."]],
+  ['Jaring-Jaring 2 (Pola 1-4-1 Kanan)',["..X.","XXXX",".X.."]],
+  ['Jaring-Jaring 3 (Pola 1-4-1 Ujung)',["...X","XXXX",".X.."]],
+  ['Jaring-Jaring 4 (Pola 1-4-1 Sejajar)',["X...","XXXX","X..."]],
+  ['Jaring-Jaring 5 (Pola 1-4-1 Zig-zag)',["X...","XXXX","..X."]],
+  ['Jaring-Jaring 6 (Pola 1-4-1 Sudut)',["X...","XXXX","...X"]],
+  ['Jaring-Jaring 7 (Pola 2-3-1 Kiri)',["XX..",".XXX","...X"]],
+  ['Jaring-Jaring 8 (Pola 2-3-1 Kanan)',["XX..",".XXX",".X.."]],
+  ['Jaring-Jaring 9 (Pola 2-2-2 Tangga)',["XX..",".XX.","..XX"]],
+  ['Jaring-Jaring 10 (Pola 1-3-2 Variasi Tangga L)',[".X..","XXX.","..XX"]],
+  ['Jaring-Jaring 11 (Pola 3-3 Kembar)',["XXX.","..XXX"]]
+];
+const gn11=CUBEN11.map(a=>[a[0],gridNet(a[1])]);
+
+const BALOK4=[
+  ['Jaring-Jaring 1 (Standar Salib)',[".X..","XXXX",".X.."]],
+  ['Jaring-Jaring 2 (Sisi Geser Kanan)',["..X.","XXXX",".X.."]],
+  ['Jaring-Jaring 3 (Pola 2-3-1)',["XX..",".XXX","...X"]],
+  ['Jaring-Jaring 4 (Pola Tangga)',["XX..",".XX.","..XX"]]
+];
+const gnBalok=BALOK4.map(a=>[a[0],gridNet(a[1])]);
+
+const V3=THREE.Vector3;
+const cuboidV=(W,H,D)=>{const x=W/2,z=D/2;return[new V3(-x,0,-z),new V3(x,0,-z),new V3(x,0,z),new V3(-x,0,z),new V3(-x,H,-z),new V3(x,H,-z),new V3(x,H,z),new V3(-x,H,z)]};
+const CF=[[0,1,2,3],[4,5,6,7],[3,2,6,7],[0,1,5,4],[0,3,7,4],[1,2,6,5]];
+const prismV=(L,H)=>{const zf=L/(2*Math.sqrt(3)),zb=zf-L*Math.sqrt(3)/2,x=L/2;return[new V3(-x,0,zf),new V3(x,0,zf),new V3(0,0,zb),new V3(-x,H,zf),new V3(x,H,zf),new V3(0,H,zb)]};
+const PF=[[0,1,2],[3,4,5],[0,1,4,3],[1,2,5,4],[2,0,3,5]];
+const pyrV=(s,H)=>{const x=s/2;return[new V3(-x,0,-x),new V3(x,0,-x),new V3(x,0,x),new V3(-x,0,x),new V3(0,H,0)]};
+const YF=[[0,1,2,3],[3,2,4],[2,1,4],[1,0,4],[0,3,4]];
+
+const PN=[
+  ['Jaring-Jaring 1 (Tiga Tegak Mengelilingi Alas)',{root:0,pairs:[[0,2],[0,3],[0,4],[2,1]]}],
+  ['Jaring-Jaring 2 (Alas dan Atap di Ujung Sisi)',{root:0,pairs:[[0,3],[3,2],[2,4],[2,1]]}],
+  ['Jaring-Jaring 3 (Deretan Segitiga Zig-Zag)',{root:0,pairs:[[0,2],[2,3],[3,4],[4,1]]}]
+];
+const YN=[
+  ['Jaring-Jaring 1 (Bintang 4 Segitiga)',{root:0,pairs:[[0,1],[0,2],[0,3],[0,4]]}],
+  ['Jaring-Jaring 2 (3 Segitiga Alas + 1 Atas)',{root:0,pairs:[[0,1],[0,2],[0,3],[3,4]]}],
+  ['Jaring-Jaring 3 (Baling-Baling Muter)',{root:0,pairs:[[0,1],[0,3],[1,2],[3,4]]}],
+  ['Jaring-Jaring 4 (Kipas Berderet)',{root:0,pairs:[[0,1],[1,2],[2,3],[3,4]]}]
+];
+
 function curved(cone,col){
   const g=new THREE.Group(),r=1.5,h=cone?4:3,s=Math.hypot(r,h),N=64,PI=Math.PI;
   const disc=()=>{const d=new THREE.CircleGeometry(r,48);d.rotateX(PI/2);return d};
   dm(disc(),col,g);
   const geo=new THREE.BufferGeometry(),pos=new Float32Array((N+1)*6),idx=[];
   for(let i=0;i<N;i++){const a=i*2,b=a+2;idx.push(a,b,a+1,b,b+1,a+1)}
-  geo.setIndex(idx);geo.setAttribute('position',new THREE.BufferAttribute(pos,3));g.add(new THREE.Mesh(geo,mat(col)));
+  geo.setIndex(idx);geo.setAttribute('position',new THREE.BufferAttribute(pos,3));
+  const lm=new THREE.Mesh(geo,mat(col));lm.frustumCulled=false;g.add(lm);
   let pv;if(!cone){pv=new THREE.Group();const cap=dm(disc(),col,pv);cap.position.z=r;g.add(pv)}
   const th=2*PI*r/s,W=2*PI*r;
   const set=t=>{
@@ -175,83 +378,337 @@ function curved(cone,col){
       for(let i=0;i<=N;i++){const a=PI*(1-t)+(-th/2+th*i/N)*Ph/th;
         for(let j=0;j<2;j++){const p=j*s,o=(i*2+j)*3;pos[o]=p*sd*Math.sin(a);pos[o+1]=Ay-p*cd;pos[o+2]=Az+p*sd*Math.cos(a)}}}
     geo.attributes.position.needsUpdate=true;geo.computeVertexNormals()};
-  return{g,H:h,set}}
+  return{g,H:h,set,ext:cone?10:11}}
 
-/* bola: utuh atau dibelah (slice) */
 function ball(col){const g=new THREE.Group(),full=new THREE.Group(),sl=new THREE.Group(),PI=Math.PI;
   const sg=new THREE.SphereGeometry(2,36,24);full.add(new THREE.Mesh(sg,mat(col)));
   full.add(new THREE.LineSegments(new THREE.WireframeGeometry(sg),new THREE.LineBasicMaterial({color:0xffffff,transparent:true,opacity:.2})));
-  eyes(full,0,.3,.95,0);full.children[full.children.length-1].position.z=1.9;
+  const e=eyes(full,0,.3,.95,0);e.position.z=1.9;
   sl.add(new THREE.Mesh(new THREE.SphereGeometry(2,36,24,0,PI*1.5),mat(col)));
   const hd=new THREE.CircleGeometry(2,32,PI/2,PI),cm=new THREE.MeshLambertMaterial({color:0xffc9c9,side:2});
   const a=new THREE.Mesh(hd,cm),b=new THREE.Mesh(hd,cm);b.rotation.y=-PI/2;sl.add(a,b);
   const ln=new THREE.Mesh(new THREE.BoxGeometry(2,.07,.07),bm(0x222222));ln.position.set(-1,0,.02);sl.add(ln);
-  const ct=new THREE.Mesh(new THREE.SphereGeometry(.16,16,12),bm(0xffd600));sl.add(ct);
+  sl.add(new THREE.Mesh(new THREE.SphereGeometry(.16,16,12),bm(0xffd600)));
   const cn=document.createElement('canvas');cn.width=cn.height=64;const cx=cn.getContext('2d');cx.font='bold 48px sans-serif';cx.textAlign='center';cx.lineWidth=7;cx.strokeStyle='#222';cx.fillStyle='#fff';cx.strokeText('r',32,50);cx.fillText('r',32,50);
   const sp=new THREE.Sprite(new THREE.SpriteMaterial({map:new THREE.CanvasTexture(cn),depthTest:false}));sp.scale.set(.9,.9,1);sp.position.set(-1,.4,.02);sl.add(sp);
   sl.rotation.y=PI;g.add(full,sl);
-  return{g,H:0,set(){full.visible=!slice;sl.visible=slice}}}
+  return{g,H:0,ext:5,set(){full.visible=!slice;sl.visible=slice}}}
 
-/* ===== Data materi ===== */
+function drawDiag(type){
+  if(type=='kubus')return `<svg viewBox="0 0 140 120" width="140" height="120"><polygon points="30,30 80,30 80,80 30,80" fill="#93c5fd" stroke="#1e40af" stroke-width="2"/><polygon points="80,30 110,10 110,60 80,80" fill="#60a5fa" stroke="#1e40af" stroke-width="2"/><polygon points="30,30 60,10 110,10 80,30" fill="#bfdbfe" stroke="#1e40af" stroke-width="2"/><line x1="30" y1="85" x2="80" y2="85" stroke="#e11d48" stroke-width="3"/><text x="55" y="102" font-weight="800" fill="#e11d48" font-size="16" text-anchor="middle">s (sisi)</text></svg>`;
+  if(type=='balok')return `<svg viewBox="0 0 160 110" width="160" height="110"><polygon points="20,40 100,40 100,90 20,90" fill="#fcd34d" stroke="#b45309" stroke-width="2"/><polygon points="100,40 135,20 135,70 100,90" fill="#fbbf24" stroke="#b45309" stroke-width="2"/><polygon points="20,40 55,20 135,20 100,40" fill="#fde68a" stroke="#b45309" stroke-width="2"/><text x="60" y="105" font-weight="800" fill="#b45309" font-size="14" text-anchor="middle">p (panjang)</text><text x="125" y="90" font-weight="800" fill="#b45309" font-size="14">l (lebar)</text><text x="5" y="70" font-weight="800" fill="#e11d48" font-size="14">t</text></svg>`;
+  if(type=='limas')return `<svg viewBox="0 0 140 120" width="140" height="120"><polygon points="20,90 80,100 120,85 70,15" fill="#c4b5fd" stroke="#5b21b6" stroke-width="2"/><line x1="70" y1="15" x2="70" y2="92" stroke="#e11d48" stroke-width="3" stroke-dasharray="4"/><line x1="70" y1="15" x2="100" y2="92.5" stroke="#2563eb" stroke-width="3"/><text x="60" y="55" font-weight="800" fill="#e11d48" font-size="14">t</text><text x="92" y="50" font-weight="800" fill="#2563eb" font-size="14">ts</text><text x="50" y="112" font-weight="800" fill="#5b21b6" font-size="14">s (sisi alas)</text></svg>`;
+  if(type=='prisma')return `<svg viewBox="0 0 140 120" width="140" height="120"><polygon points="20,90 80,90 50,60" fill="#fbcfe8" stroke="#be185d" stroke-width="2"/><polygon points="20,30 80,30 50,0" fill="#fbcfe8" stroke="#be185d" stroke-width="2"/><line x1="20" y1="30" x2="20" y2="90" stroke="#be185d" stroke-width="2"/><line x1="80" y1="30" x2="80" y2="90" stroke="#be185d" stroke-width="2"/><line x1="50" y1="0" x2="50" y2="60" stroke="#be185d" stroke-width="2"/><line x1="88" y1="30" x2="88" y2="90" stroke="#e11d48" stroke-width="3"/><text x="96" y="65" font-weight="800" fill="#e11d48" font-size="14">t (tinggi)</text><text x="50" y="108" font-weight="800" fill="#be185d" font-size="14" text-anchor="middle">a (sisi alas)</text></svg>`;
+  if(type=='tabung')return `<svg viewBox="0 0 130 120" width="130" height="120"><ellipse cx="65" cy="25" rx="40" ry="15" fill="#a5f3fc" stroke="#0891b2" stroke-width="2"/><path d="M25 25 V95 A40 15 0 0 0 105 95 V25 Z" fill="#67e8f9" stroke="#0891b2" stroke-width="2"/><line x1="65" y1="25" x2="105" y2="25" stroke="#e11d48" stroke-width="3"/><line x1="112" y1="25" x2="112" y2="95" stroke="#059669" stroke-width="3"/><text x="82" y="20" font-weight="800" fill="#e11d48" font-size="14">r</text><text x="118" y="65" font-weight="800" fill="#059669" font-size="14">t</text></svg>`;
+  if(type=='kerucut')return `<svg viewBox="0 0 130 120" width="130" height="120"><path d="M65 10 L25 95 A40 15 0 0 0 105 95 Z" fill="#86efac" stroke="#15803d" stroke-width="2"/><line x1="65" y1="10" x2="65" y2="95" stroke="#e11d48" stroke-width="3" stroke-dasharray="4"/><line x1="65" y1="95" x2="105" y2="95" stroke="#2563eb" stroke-width="3"/><line x1="65" y1="10" x2="105" y2="95" stroke="#d97706" stroke-width="3"/><text x="52" y="55" font-weight="800" fill="#e11d48" font-size="14">t</text><text x="85" y="90" font-weight="800" fill="#2563eb" font-size="14">r</text><text x="90" y="50" font-weight="800" fill="#d97706" font-size="14">s</text></svg>`;
+  return `<svg viewBox="0 0 120 120" width="120" height="120"><circle cx="60" cy="60" r="45" fill="#fca5a5" stroke="#dc2626" stroke-width="2"/><ellipse cx="60" cy="60" rx="45" ry="16" fill="none" stroke="#dc2626" stroke-width="2" stroke-dasharray="4"/><line x1="60" y1="60" x2="105" y2="60" stroke="#e11d48" stroke-width="3"/><text x="80" y="52" font-weight="800" fill="#e11d48" font-size="14">r</text></svg>`;
+}
+
+/* ===== DATA MATERI & PERHITUNGAN RAMAH ANAK ===== */
 const M={
-kubus:{n:'Kubus',c:0x3b82f6,b:()=>poly(rect(3,3),3,0,0x3b82f6),
- d:'Kubus adalah bangun ruang tiga dimensi yang dibatasi oleh 6 buah sisi berbentuk persegi yang sama besar (kongruen).',
- s:['Memiliki 6 sisi berbentuk persegi yang sama besar','Memiliki 12 rusuk yang sama panjang','Memiliki 8 titik sudut','Memiliki 12 diagonal bidang dan 4 diagonal ruang','Semua sudutnya siku-siku (90°)','Jaring-jaringnya terdiri dari 6 persegi yang sama'],
- r:[['Luas alas','s × s'],['Luas permukaan','6 × s × s'],['Volume','s × s × s']],
- k:[['sisi','s',5]],h:o=>{const s=o.s;return[['Luas alas',`${f(s)} × ${f(s)}`,s*s,'cm²'],['Luas permukaan',`6 × ${f(s)} × ${f(s)}`,6*s*s,'cm²'],['Volume',`${f(s)} × ${f(s)} × ${f(s)}`,s**3,'cm³']]}},
-balok:{n:'Balok',c:0xf59e0b,b:()=>poly(rect(4,2),3,0,0xf59e0b),
- d:'Balok adalah bangun ruang tiga dimensi yang dibatasi oleh 6 buah sisi berbentuk persegi panjang, dengan sisi yang berhadapan sama besar.',
- s:['Memiliki 6 sisi: 3 pasang persegi panjang yang berhadapan dan sama besar','Memiliki 12 rusuk: 4 rusuk panjang, 4 rusuk lebar, 4 rusuk tinggi','Memiliki 8 titik sudut','Memiliki 12 diagonal bidang dan 4 diagonal ruang','Semua sudutnya siku-siku (90°)'],
- r:[['Luas alas','p × l'],['Luas permukaan','2 × (p×l + p×t + l×t)'],['Volume','p × l × t']],
- k:[['panjang','p',5],['lebar','l',3],['tinggi','t',2]],h:o=>{const{p,l,t}=o;return[['Luas alas',`${f(p)} × ${f(l)}`,p*l,'cm²'],['Luas permukaan',`2 × (${f(p*l)} + ${f(p*t)} + ${f(l*t)})`,2*(p*l+p*t+l*t),'cm²'],['Volume',`${f(p)} × ${f(l)} × ${f(t)}`,p*l*t,'cm³']]}},
-prisma:{n:'Prisma Segitiga',c:0xec4899,b:()=>poly(tri(3),3.5,0,0xec4899),
- d:'Prisma segitiga adalah bangun ruang yang memiliki alas dan atap berbentuk segitiga yang sama besar, dihubungkan oleh 3 sisi tegak berbentuk persegi panjang.',
- s:['Memiliki 5 sisi: 2 segitiga (alas dan atap) dan 3 persegi panjang','Memiliki 9 rusuk','Memiliki 6 titik sudut','Alas dan atap sejajar dan kongruen','Sisi tegaknya tegak lurus terhadap alas','Jaring-jaringnya: 3 persegi panjang berjajar + 2 segitiga'],
- r:[['Luas alas (segitiga sama sisi)','¼ × √3 × a × a'],['Luas permukaan','(2 × luas alas) + (keliling alas × t)'],['Volume','luas alas × t']],
- k:[['sisi alas','a',4],['tinggi','t',6]],h:o=>{const{a,t}=o,La=Math.sqrt(3)/4*a*a;return[['Luas alas',`¼ × √3 × ${f(a)} × ${f(a)}`,La,'cm²'],['Luas permukaan',`(2 × ${f(La)}) + (${f(3*a)} × ${f(t)})`,2*La+3*a*t,'cm²'],['Volume',`${f(La)} × ${f(t)}`,La*t,'cm³']]}},
-limas:{n:'Limas Segiempat',c:0x8b5cf6,b:()=>poly(rect(3,3),3,1,0x8b5cf6),
- d:'Limas segiempat adalah bangun ruang yang dibatasi oleh alas berbentuk persegi dan 4 sisi tegak berbentuk segitiga yang bertemu di satu titik puncak.',
- s:['Memiliki 5 sisi: 1 persegi (alas) dan 4 segitiga (sisi tegak)','Memiliki 8 rusuk: 4 rusuk alas dan 4 rusuk tegak','Memiliki 5 titik sudut: 4 di alas dan 1 puncak','Sisi tegaknya segitiga sama kaki yang kongruen','Tinggi limas = jarak puncak ke titik tengah alas','Jaring-jaringnya berbentuk bintang: 1 persegi dikelilingi 4 segitiga'],
- r:[['Luas alas','s × s'],['Tinggi segitiga (ts)','√((s ÷ 2)² + t²)'],['Luas permukaan','luas alas + 4 × (½ × s × ts)'],['Volume','⅓ × luas alas × t']],
- k:[['sisi alas','s',6],['tinggi','t',4]],h:o=>{const{s,t}=o,l=Math.hypot(s/2,t);return[['Luas alas',`${f(s)} × ${f(s)}`,s*s,'cm²'],['Tinggi segitiga (ts)',`√(${f(s/2)}² + ${f(t)}²)`,l,'cm'],['Luas permukaan',`${f(s*s)} + (4 × ½ × ${f(s)} × ${f(l)})`,s*s+2*s*l,'cm²'],['Volume',`⅓ × ${f(s*s)} × ${f(t)}`,s*s*t/3,'cm³']]}},
+kubus:{n:'Kubus',c:0x3b82f6,b:()=>mkPoly(cuboidV(3,3,3),CF,0x3b82f6,3,gn11),
+ d:'Kubus adalah bangun ruang yang memiliki 6 sisi persegi yang semuanya sama besar.',
+ s:['Memiliki 6 sisi berbentuk persegi yang sama besar','Memiliki 12 rusuk yang sama panjang','Memiliki 8 titik sudut','Ada 11 pola jaring-jaring kubus lengkap. Cobalah tombol jaring-jaring di bawah!'],
+ r:[['Luas Alas','s × s'],['Luas Permukaan','6 × s × s'],['Volume','s × s × s'],['Mencari Sisi (s) dari Volume','s = ∛Volume'],['Mencari Sisi (s) dari Luas Permukaan','s = √(Luas Permukaan ÷ 6)']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>s</b> = panjang sisi / rusuk kubus (cm)'},
+
+balok:{n:'Balok',c:0xf59e0b,b:()=>mkPoly(cuboidV(4,3,2),CF,0xf59e0b,3,gnBalok),
+ d:'Balok adalah bangun ruang yang dibatasi oleh 3 pasang persegi panjang yang saling berhadapan.',
+ s:['Memiliki 6 sisi (3 pasang persegi panjang yang sama besar)','Memiliki 12 rusuk (4 panjang, 4 lebar, 4 tinggi)','Memiliki 8 titik sudut'],
+ r:[['Luas Alas','p × l'],['Luas Permukaan','2 × (p×l + p×t + l×t)'],['Volume','p × l × t'],['Mencari Tinggi Balok (t)','t = Volume ÷ (p × l)'],['Mencari Panjang Balok (p)','p = Volume ÷ (l × t)'],['Mencari Lebar Balok (l)','l = Volume ÷ (p × t)']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>p</b> = panjang (cm)<br>• <b>l</b> = lebar (cm)<br>• <b>t</b> = tinggi (cm)'},
+
+prisma:{n:'Prisma Segitiga',c:0xec4899,b:()=>mkPoly(prismV(3,3.5),PF,0xec4899,3.5,PN),
+ d:'Prisma segitiga adalah bangun ruang dengan alas dan atap berbentuk segitiga yang sama besar.',
+ s:['Memiliki 5 sisi (2 segitiga sebagai alas & atap, 3 persegi panjang sisi tegak)','Memiliki 9 rusuk','Memiliki 6 titik sudut'],
+ r:[['Luas Alas (Segitiga)','½ × a × t_alas'],['Luas Permukaan','(2 × Luas Alas) + (Keliling Alas × t)'],['Volume','Luas Alas × t'],['Mencari Tinggi Prisma (t)','t = Volume ÷ Luas Alas'],['Mencari Tinggi Alas (t_alas)','t_alas = (2 × Luas Alas) ÷ a']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>a</b> = sisi/alas segitiga (cm)<br>• <b>t_alas</b> = tinggi segitiga alas (cm)<br>• <b>t</b> = tinggi prisma (cm)'},
+
+limas:{n:'Limas Segiempat',c:0x8b5cf6,b:()=>mkPoly(pyrV(3,3),YF,0x8b5cf6,3,YN),
+ d:'Limas segiempat memiliki alas berbentuk persegi dan 4 sisi tegak segitiga yang bertemu di satu titik puncak.',
+ s:['Memiliki 5 sisi (1 persegi di alas + 4 segitiga di sisi tegak)','Memiliki 8 rusuk','Memiliki 5 titik sudut'],
+ r:[['Luas Alas (Persegi)','s × s'],['Tinggi Segitiga Tegak (ts)','ts = √((s ÷ 2)² + t²)'],['Luas Permukaan','Luas Alas + (4 × ½ × s × ts)'],['Volume','⅓ × Luas Alas × t'],['Mencari Tinggi Limas (t)','t = (3 × Volume) ÷ Luas Alas'],['Mencari Sisi Alas (s)','s = √((3 × Volume) ÷ t)']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>s</b> = panjang sisi alas (cm)<br>• <b>t</b> = tinggi limas (cm)<br>• <b>ts</b> = tinggi segitiga sisi tegak (cm)'},
+
 tabung:{n:'Tabung',c:0x06b6d4,b:()=>curved(0,0x06b6d4),
- d:'Tabung adalah bangun ruang yang dibatasi oleh dua lingkaran sejajar yang sama besar (alas dan tutup) dan sebuah selimut berbentuk bidang lengkung.',
- s:['Memiliki 3 sisi: alas, tutup, dan selimut','Memiliki 2 rusuk lengkung','Tidak memiliki titik sudut','Alas dan tutup berupa lingkaran sama besar','Selimut jika dibuka berbentuk persegi panjang: panjang 2πr, lebar t'],
- r:[['Luas alas','π × r × r'],['Luas selimut','2 × π × r × t'],['Luas permukaan','2 × π × r × (r + t)'],['Volume','π × r × r × t']],
- k:[['jari-jari','r',7],['tinggi','t',10]],h:o=>{const{r,t}=o;return[['Luas alas',`3,14 × ${f(r)} × ${f(r)}`,3.14*r*r,'cm²'],['Luas selimut',`2 × 3,14 × ${f(r)} × ${f(t)}`,2*3.14*r*t,'cm²'],['Luas permukaan',`2 × 3,14 × ${f(r)} × (${f(r)} + ${f(t)})`,2*3.14*r*(r+t),'cm²'],['Volume',`3,14 × ${f(r*r)} × ${f(t)}`,3.14*r*r*t,'cm³']]}},
+ d:'Tabung memiliki alas dan tutup berbentuk lingkaran yang sejajar serta selimut bidang lengkung.',
+ s:['Memiliki 3 sisi (alas, tutup, selimut)','Memiliki 2 rusuk lengkung','Tidak memiliki titik sudut'],
+ r:[['Luas Alas','π × r × r'],['Luas Selimut','2 × π × r × t'],['Luas Permukaan','2 × π × r × (r + t)'],['Volume','π × r × r × t'],['Mencari Tinggi Tabung (t)','t = Volume ÷ (π × r²)'],['Mencari Jari-Jari (r)','r = √(Volume ÷ (π × t))']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>r</b> = jari-jari (cm)<br>• <b>t</b> = tinggi tabung (cm)<br>• <b>π</b> = 3,14'},
+
 kerucut:{n:'Kerucut',c:0x22c55e,b:()=>curved(1,0x22c55e),
- d:'Kerucut adalah bangun ruang yang dibatasi oleh sebuah alas berbentuk lingkaran dan selimut lengkung yang meruncing ke satu titik puncak.',
- s:['Memiliki 2 sisi: alas lingkaran dan selimut','Memiliki 1 rusuk lengkung','Memiliki 1 titik puncak','Selimut jika dibuka berbentuk juring (potongan lingkaran)','Garis pelukis s = √(r² + t²)'],
- r:[['Luas alas','π × r × r'],['Luas selimut','π × r × s'],['Luas permukaan','π × r × (r + s)'],['Volume','⅓ × π × r × r × t']],
- k:[['jari-jari','r',7],['tinggi','t',24]],h:o=>{const{r,t}=o,s=Math.hypot(r,t);return[['Garis pelukis (s)',`√(${f(r)}² + ${f(t)}²)`,s,'cm'],['Luas alas',`3,14 × ${f(r)} × ${f(r)}`,3.14*r*r,'cm²'],['Luas selimut',`3,14 × ${f(r)} × ${f(s)}`,3.14*r*s,'cm²'],['Luas permukaan',`3,14 × ${f(r)} × (${f(r)} + ${f(s)})`,3.14*r*(r+s),'cm²'],['Volume',`⅓ × 3,14 × ${f(r*r)} × ${f(t)}`,3.14*r*r*t/3,'cm³']]}},
+ d:'Kerucut memiliki alas lingkaran dan selimut yang meruncing ke satu titik puncak.',
+ s:['Memiliki 2 sisi (alas lingkaran & selimut)','Memiliki 1 rusuk lengkung','Memiliki 1 titik puncak'],
+ r:[['Garis Pelukis (s)','s = √(r² + t²)'],['Luas Selimut','π × r × s'],['Luas Permukaan','π × r × (r + s)'],['Volume','⅓ × π × r × r × t'],['Mencari Tinggi Kerucut (t)','t = (3 × Volume) ÷ (π × r²)'],['Mencari Jari-Jari Alas (r)','r = √((3 × Volume) ÷ (π × t))']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>r</b> = jari-jari (cm)<br>• <b>t</b> = tinggi kerucut (cm)<br>• <b>s</b> = garis pelukis (cm)'},
+
 bola:{n:'Bola',c:0xef4444,b:()=>ball(0xef4444),
- d:'Bola adalah bangun ruang yang dibatasi oleh satu bidang lengkung, dengan semua titik pada permukaannya berjarak sama (r) dari titik pusat.',
- s:['Memiliki 1 sisi lengkung','Tidak memiliki rusuk dan titik sudut','Semua jari-jari (r) sama panjang','Diameter = 2 × r','Tidak bisa dibuka menjadi jaring-jaring datar','Tekan tombol Belah Bola untuk melihat bagian dalam dan titik pusat'],
- r:[['Luas lingkaran besar','π × r × r'],['Luas permukaan','4 × π × r × r'],['Volume','⁴⁄₃ × π × r × r × r']],
- k:[['jari-jari','r',7]],h:o=>{const r=o.r;return[['Luas lingkaran besar',`3,14 × ${f(r)} × ${f(r)}`,3.14*r*r,'cm²'],['Luas permukaan',`4 × 3,14 × ${f(r*r)}`,4*3.14*r*r,'cm²'],['Volume',`⁴⁄₃ × 3,14 × ${f(r**3)}`,4/3*3.14*r**3,'cm³']]}}
+ d:'Bola adalah bangun ruang yang dibatasi oleh satu bidang lengkung.',
+ s:['Memiliki 1 sisi lengkung','Tidak memiliki rusuk dan titik sudut','Semua jari-jari (r) sama panjang'],
+ r:[['Luas Permukaan','4 × π × r × r'],['Volume','⁴⁄₃ × π × r × r × r'],['Mencari Jari-Jari (r) dari Volume','r = ∛((3 × Volume) ÷ (4 × π))'],['Mencari Jari-Jari (r) dari Luas Permukaan','r = √(Luas Permukaan ÷ (4 × π))']],
+ sim:'<b>Keterangan Simbol:</b><br>• <b>r</b> = jari-jari bola (cm)'}
 };
+
 $('#chips').innerHTML=Object.keys(M).map(k=>`<button class="chip" id="c_${k}" style="background:#${M[k].c.toString(16).padStart(6,'0')}" onclick="pick('${k}')">${M[k].n.split(' ')[0]}</button>`).join('');
 const tab=n=>[0,1,2].forEach(i=>$('#t'+i).classList.toggle('hide',i!=n));
 
+function fit(){if(!R||!cur)return;let d=cur.ext;
+  if(!d){const rx=root.rotation.x,ry=root.rotation.y;root.rotation.set(0,0,0);cur.set(0);inner.position.y=0;root.updateMatrixWorld(true);
+    const s=new THREE.Box3().setFromObject(inner).getSize(new V3());d=Math.hypot(s.x,s.z);root.rotation.set(rx,ry,0)}
+  cam.position.z=Math.max(11,Math.min(34,d*.65/(Math.tan(.349)*Math.min(cam.aspect,1.3))))}
+
+function selPat(i){cur.pat(i);fit();T=1;tg=0;document.querySelectorAll('.pb').forEach((b,j)=>b.classList.toggle('on',j==i));$('#pn').textContent=cur.nets[i][0]}
+
 function pick(key){
   if(!R)return;const m=M[key];while(inner.children.length)inner.remove(inner.children[0]);mats=[];slice=false;
-  cur=m.b();inner.add(cur.g);applyWf();T=tg=1;$('#sl').value=100;
+  cur=m.b();inner.add(cur.g);applyWf();T=tg=1;$('#sl').value=100;rs();
   const sph=key=='bola';['#sl','#bo','#bl'].forEach(s=>$(s).disabled=sph);$('#bs').classList.toggle('hide',!sph);
+  $('#pats').innerHTML=cur.nets?cur.nets.map((n,i)=>`<button class="btn b2 pb${i?'':' on'}" onclick="selPat(${i})">Jaring-Jaring ${i+1}</button>`).join(''):'';
+  $('#pn').textContent=cur.nets?cur.nets[0][0]:sph?'Bola tidak punya jaring-jaring datar.':m.n+' punya 1 pola jaring-jaring.';
+  fit();
   document.querySelectorAll('.chip').forEach(c=>c.classList.toggle('on',c.id=='c_'+key));
+  
   $('#info').innerHTML=`<h2>Apa itu ${m.n}?</h2><p>${m.d}</p>
-   <div><button class="btn b2" onclick="tab(0)">Sifat-Sifat</button><button class="btn b1" onclick="tab(1)">Rumus</button><button class="btn b3" onclick="tab(2)">Hitung</button></div>
+   <div style="margin:8px 0"><button class="btn b2" onclick="tab(0)">Sifat-Sifat</button><button class="btn b1" onclick="tab(1)">Rumus & Gambar</button><button class="btn b3" onclick="tab(2)">Kalkulator Hitung</button></div>
    <div id="t0"><ul>${m.s.map(x=>`<li>${x}</li>`).join('')}</ul></div>
-   <div id="t1" class="hide">${m.r.map(x=>`<div class="f"><small>${x[0]}</small>${x[1]}</div>`).join('')}</div>
-   <div id="t2" class="hide"><b>Coba hitung dengan ukuranmu sendiri:</b><div class="calc">${m.k.map(k=>`<label>${k[0]} <input id="i_${k[1]}" type="number" min="0.1" step="any" value="${k[2]}" oninput="calc('${key}')"></label>`).join('')}</div><div id="res"></div></div>`;
-  calc(key)}
-function calc(key){const m=M[key],o={};m.k.forEach(k=>o[k[1]]=Math.max(+$('#i_'+k[1]).value||0,0));
-  $('#res').innerHTML=m.h(o).map(x=>`<div class="f"><small>${x[0]}</small>${x[1]} = ${f(x[2])} ${x[3]}</div>`).join('')}
+   <div id="t1" class="hide">
+      <div class="diag-img">${drawDiag(key)}</div>
+      <div class="f" style="background:#fffbe6;border-color:#f59e0b;color:#4a2c12">${m.sim}</div>
+      ${m.r.map(x=>`<div class="f"><small>${x[0]}</small>${x[1]}</div>`).join('')}
+   </div>
+   <div id="t2" class="hide">${renderCalcUI(key)}</div>`;
+  renderCalcLogic(key);
+}
+
+/* UI Kalkulator Bahasa Ramah Anak SD */
+function renderCalcUI(key){
+  if(key=='kubus'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('kubus')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika sudah tahu panjang sisinya)</option>
+      <option value="rev_v">🔍 Cari Panjang Sisi (s) (Jika diketahui isi / Volumenya)</option>
+      <option value="rev_lp">🔍 Cari Panjang Sisi (s) (Jika diketahui Luas Permukaannya)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  if(key=='balok'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('balok')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika sudah tahu panjang, lebar, tinggi)</option>
+      <option value="find_t">🔍 Cari Tinggi Balok (t) (Jika diketahui Volumenya)</option>
+      <option value="find_p">🔍 Cari Panjang Balok (p) (Jika diketahui Volumenya)</option>
+      <option value="find_l">🔍 Cari Lebar Balok (l) (Jika diketahui Volumenya)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  if(key=='prisma'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('prisma')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika sudah tahu alas & tinggi)</option>
+      <option value="find_tp">🔍 Cari Tinggi Prisma (t) (Jika diketahui Volumenya)</option>
+      <option value="find_ta">🔍 Cari Tinggi Segitiga Alas (Jika diketahui Luas Alas)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  if(key=='limas'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('limas')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika tahu sisi alas & tinggi)</option>
+      <option value="find_t">🔍 Cari Tinggi Limas (t) (Jika diketahui Volumenya)</option>
+      <option value="find_s">🔍 Cari Panjang Sisi Alas (s) (Jika diketahui Volumenya)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  if(key=='tabung'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('tabung')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika tahu jari-jari & tinggi)</option>
+      <option value="find_t">🔍 Cari Tinggi Tabung (t) (Jika diketahui Volumenya)</option>
+      <option value="find_r">🔍 Cari Jari-Jari (r) (Jika diketahui Volumenya)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  if(key=='kerucut'){
+    return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+    <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('kerucut')">
+      <option value="std">🟢 Hitung Luas & Volume (Jika tahu jari-jari & tinggi)</option>
+      <option value="find_t">🔍 Cari Tinggi Kerucut (t) (Jika diketahui Volumenya)</option>
+      <option value="find_r">🔍 Cari Jari-Jari Alas (r) (Jika diketahui Volumenya)</option>
+    </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+  }
+  return `<b>Pilih Apa Yang Ingin Kamu Cari:</b>
+  <div style="margin:6px 0"><select id="k_mode" onchange="renderCalcLogic('bola')">
+    <option value="std">🟢 Hitung Luas & Volume (Jika sudah tahu jari-jarinya)</option>
+    <option value="find_rv">🔍 Cari Jari-Jari Bola (r) (Jika diketahui Volumenya)</option>
+    <option value="find_rlp">🔍 Cari Jari-Jari Bola (r) (Jika diketahui Luas Permukaan)</option>
+  </select></div><div class="calc" id="c_inputs"></div><div id="res"></div>`;
+}
+
+function renderCalcLogic(key){
+  const m=$('#k_mode')?$('#k_mode').value:'std';
+  const inp=$('#c_inputs');if(!inp)return;
+
+  if(key=='kubus'){
+    if(m=='std'){inp.innerHTML=`<label>Panjang Sisi (s): <input id="i_s" type="number" value="6" oninput="calcK()"></label>`;}
+    else if(m=='rev_v'){inp.innerHTML=`<label>Isi / Volume (V): <input id="i_v" type="number" value="216" oninput="calcK()"></label>`;}
+    else{inp.innerHTML=`<label>Luas Permukaan (LP): <input id="i_lp" type="number" value="216" oninput="calcK()"></label>`;}
+    calcK();
+  } else if(key=='balok'){
+    if(m=='std'){inp.innerHTML=`<label>Panjang (p): <input id="i_p" type="number" value="8" oninput="calcB()"></label><label>Lebar (l): <input id="i_l" type="number" value="5" oninput="calcB()"></label><label>Tinggi (t): <input id="i_t" type="number" value="4" oninput="calcB()"></label>`;}
+    else if(m=='find_t'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="160" oninput="calcB()"></label><label>Panjang (p): <input id="i_p" type="number" value="8" oninput="calcB()"></label><label>Lebar (l): <input id="i_l" type="number" value="5" oninput="calcB()"></label>`;}
+    else if(m=='find_p'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="160" oninput="calcB()"></label><label>Lebar (l): <input id="i_l" type="number" value="5" oninput="calcB()"></label><label>Tinggi (t): <input id="i_t" type="number" value="4" oninput="calcB()"></label>`;}
+    else{inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="160" oninput="calcB()"></label><label>Panjang (p): <input id="i_p" type="number" value="8" oninput="calcB()"></label><label>Tinggi (t): <input id="i_t" type="number" value="4" oninput="calcB()"></label>`;}
+    calcB();
+  } else if(key=='prisma'){
+    if(m=='std'){inp.innerHTML=`<label>Sisi Alas (a): <input id="i_a" type="number" value="6" oninput="calcP()"></label><label>Tinggi Alas (ta): <input id="i_ta" type="number" value="5" oninput="calcP()"></label><label>Tinggi Prisma (t): <input id="i_t" type="number" value="10" oninput="calcP()"></label>`;}
+    else if(m=='find_tp'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="150" oninput="calcP()"></label><label>Luas Alas: <input id="i_la" type="number" value="15" oninput="calcP()"></label>`;}
+    else{inp.innerHTML=`<label>Luas Alas: <input id="i_la" type="number" value="15" oninput="calcP()"></label><label>Sisi Alas (a): <input id="i_a" type="number" value="6" oninput="calcP()"></label>`;}
+    calcP();
+  } else if(key=='limas'){
+    if(m=='std'){inp.innerHTML=`<label>Sisi Alas (s): <input id="i_s" type="number" value="6" oninput="calcL()"></label><label>Tinggi Limas (t): <input id="i_t" type="number" value="4" oninput="calcL()"></label>`;}
+    else if(m=='find_t'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="48" oninput="calcL()"></label><label>Sisi Alas (s): <input id="i_s" type="number" value="6" oninput="calcL()"></label>`;}
+    else{inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="48" oninput="calcL()"></label><label>Tinggi Limas (t): <input id="i_t" type="number" value="4" oninput="calcL()"></label>`;}
+    calcL();
+  } else if(key=='tabung'){
+    if(m=='std'){inp.innerHTML=`<label>Jari-jari (r): <input id="i_r" type="number" value="7" oninput="calcTb()"></label><label>Tinggi (t): <input id="i_t" type="number" value="10" oninput="calcTb()"></label>`;}
+    else if(m=='find_t'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="1538.6" oninput="calcTb()"></label><label>Jari-jari (r): <input id="i_r" type="number" value="7" oninput="calcTb()"></label>`;}
+    else{inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="1538.6" oninput="calcTb()"></label><label>Tinggi (t): <input id="i_t" type="number" value="10" oninput="calcTb()"></label>`;}
+    calcTb();
+  } else if(key=='kerucut'){
+    if(m=='std'){inp.innerHTML=`<label>Jari-jari (r): <input id="i_r" type="number" value="7" oninput="calcKc()"></label><label>Tinggi (t): <input id="i_t" type="number" value="24" oninput="calcKc()"></label>`;}
+    else if(m=='find_t'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="1230.88" oninput="calcKc()"></label><label>Jari-jari (r): <input id="i_r" type="number" value="7" oninput="calcKc()"></label>`;}
+    else{inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="1230.88" oninput="calcKc()"></label><label>Tinggi (t): <input id="i_t" type="number" value="24" oninput="calcKc()"></label>`;}
+    calcKc();
+  } else if(key=='bola'){
+    if(m=='std'){inp.innerHTML=`<label>Jari-jari (r): <input id="i_r" type="number" value="7" oninput="calcBl()"></label>`;}
+    else if(m=='find_rv'){inp.innerHTML=`<label>Volume: <input id="i_v" type="number" value="1436.03" oninput="calcBl()"></label>`;}
+    else{inp.innerHTML=`<label>Luas Permukaan: <input id="i_lp" type="number" value="615.44" oninput="calcBl()"></label>`;}
+    calcBl();
+  }
+}
+
+/* Kalkulator Logika */
+function calcK(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const s=Math.max(+$('#i_s').value||0,0);
+    html=`<div class="f"><small>Luas Alas (s × s)</small>${f(s)} × ${f(s)} = <b>${f(s*s)} cm²</b></div>
+    <div class="f"><small>Luas Permukaan (6 × s × s)</small>6 × ${f(s)} × ${f(s)} = <b>${f(6*s*s)} cm²</b></div>
+    <div class="f"><small>Volume (s × s × s)</small>${f(s)} × ${f(s)} × ${f(s)} = <b>${f(s**3)} cm³</b></div>`;
+  }else if(m=='rev_v'){
+    const v=Math.max(+$('#i_v').value||0,0),s=Math.cbrt(v);
+    html=`<div class="f"><small>Panjang Sisi (s = ∛Volume)</small>∛${f(v)} = <b>${f(s)} cm</b></div>`;
+  }else{
+    const lp=Math.max(+$('#i_lp').value||0,0),s=Math.sqrt(lp/6);
+    html=`<div class="f"><small>Panjang Sisi (s = √(LP ÷ 6))</small>√(${f(lp)} ÷ 6) = <b>${f(s)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcB(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const p=+$('#i_p').value||0,l=+$('#i_l').value||0,t=+$('#i_t').value||0;
+    html=`<div class="f"><small>Luas Alas (p × l)</small>${f(p)} × ${f(l)} = <b>${f(p*l)} cm²</b></div>
+    <div class="f"><small>Luas Permukaan (2 × (p×l + p×t + l×t))</small>2 × (${f(p*l)} + ${f(p*t)} + ${f(l*t)}) = <b>${f(2*(p*l+p*t+l*t))} cm²</b></div>
+    <div class="f"><small>Volume (p × l × t)</small>${f(p)} × ${f(l)} × ${f(t)} = <b>${f(p*l*t)} cm³</b></div>`;
+  }else if(m=='find_t'){
+    const v=+$('#i_v').value||0,p=+$('#i_p').value||0,l=+$('#i_l').value||0,t=v/(p*l||1);
+    html=`<div class="f"><small>Tinggi Balok (t = Volume ÷ (p × l))</small>${f(v)} ÷ (${f(p)} × ${f(l)}) = <b>${f(t)} cm</b></div>`;
+  }else if(m=='find_p'){
+    const v=+$('#i_v').value||0,l=+$('#i_l').value||0,t=+$('#i_t').value||0,p=v/(l*t||1);
+    html=`<div class="f"><small>Panjang Balok (p = Volume ÷ (l × t))</small>${f(v)} ÷ (${f(l)} × ${f(t)}) = <b>${f(p)} cm</b></div>`;
+  }else{
+    const v=+$('#i_v').value||0,p=+$('#i_p').value||0,t=+$('#i_t').value||0,l=v/(p*t||1);
+    html=`<div class="f"><small>Lebar Balok (l = Volume ÷ (p × t))</small>${f(v)} ÷ (${f(p)} × ${f(t)}) = <b>${f(l)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcP(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const a=+$('#i_a').value||0,ta=+$('#i_ta').value||0,t=+$('#i_t').value||0,La=0.5*a*ta;
+    html=`<div class="f"><small>Luas Alas (½ × a × ta)</small>½ × ${f(a)} × ${f(ta)} = <b>${f(La)} cm²</b></div>
+    <div class="f"><small>Volume (Luas Alas × t)</small>${f(La)} × ${f(t)} = <b>${f(La*t)} cm³</b></div>`;
+  }else if(m=='find_tp'){
+    const v=+$('#i_v').value||0,la=+$('#i_la').value||0,t=v/(la||1);
+    html=`<div class="f"><small>Tinggi Prisma (t = Volume ÷ Luas Alas)</small>${f(v)} ÷ ${f(la)} = <b>${f(t)} cm</b></div>`;
+  }else{
+    const la=+$('#i_la').value||0,a=+$('#i_a').value||0,ta=(2*la)/(a||1);
+    html=`<div class="f"><small>Tinggi Segitiga Alas (ta = (2 × Luas Alas) ÷ a)</small>(2 × ${f(la)}) ÷ ${f(a)} = <b>${f(ta)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcL(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const s=+$('#i_s').value||0,t=+$('#i_t').value||0,la=s*s,v=(la*t)/3,ts=Math.hypot(s/2,t),lp=la+2*s*ts;
+    html=`<div class="f"><small>Luas Alas (s × s)</small>${f(s)} × ${f(s)} = <b>${f(la)} cm²</b></div>
+    <div class="f"><small>Tinggi Segitiga Tegak (ts)</small>√(${f(s/2)}² + ${f(t)}²) = <b>${f(ts)} cm</b></div>
+    <div class="f"><small>Volume (⅓ × Luas Alas × t)</small>⅓ × ${f(la)} × ${f(t)} = <b>${f(v)} cm³</b></div>
+    <div class="f"><small>Luas Permukaan</small>${f(la)} + (4 × ½ × ${f(s)} × ${f(ts)}) = <b>${f(lp)} cm²</b></div>`;
+  }else if(m=='find_t'){
+    const v=+$('#i_v').value||0,s=+$('#i_s').value||0,la=s*s,t=(3*v)/(la||1);
+    html=`<div class="f"><small>Tinggi Limas (t = (3 × Volume) ÷ (s × s))</small>(3 × ${f(v)}) ÷ ${f(la)} = <b>${f(t)} cm</b></div>`;
+  }else{
+    const v=+$('#i_v').value||0,t=+$('#i_t').value||0,s=Math.sqrt((3*v)/(t||1));
+    html=`<div class="f"><small>Sisi Alas (s = √((3 × Volume) ÷ t))</small>√((3 × ${f(v)}) ÷ ${f(t)}) = <b>${f(s)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcTb(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const r=+$('#i_r').value||0,t=+$('#i_t').value||0,la=3.14*r*r,v=la*t,lp=2*3.14*r*(r+t);
+    html=`<div class="f"><small>Luas Alas (π × r²)</small>3,14 × ${f(r*r)} = <b>${f(la)} cm²</b></div>
+    <div class="f"><small>Volume (π × r² × t)</small>${f(la)} × ${f(t)} = <b>${f(v)} cm³</b></div>
+    <div class="f"><small>Luas Permukaan (2 × π × r × (r + t))</small>2 × 3,14 × ${f(r)} × (${f(r)}+${f(t)}) = <b>${f(lp)} cm²</b></div>`;
+  }else if(m=='find_t'){
+    const v=+$('#i_v').value||0,r=+$('#i_r').value||0,la=3.14*r*r,t=v/(la||1);
+    html=`<div class="f"><small>Tinggi Tabung (t = Volume ÷ (π × r²))</small>${f(v)} ÷ ${f(la)} = <b>${f(t)} cm</b></div>`;
+  }else{
+    const v=+$('#i_v').value||0,t=+$('#i_t').value||0,r=Math.sqrt(v/(3.14*t||1));
+    html=`<div class="f"><small>Jari-Jari (r = √(Volume ÷ (π × t)))</small>√(${f(v)} ÷ (3,14 × ${f(t)})) = <b>${f(r)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcKc(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const r=+$('#i_r').value||0,t=+$('#i_t').value||0,s=Math.hypot(r,t),v=(3.14*r*r*t)/3,lp=3.14*r*(r+s);
+    html=`<div class="f"><small>Garis Pelukis (s = √(r² + t²))</small>√(${f(r)}² + ${f(t)}²) = <b>${f(s)} cm</b></div>
+    <div class="f"><small>Volume (⅓ × π × r² × t)</small>⅓ × 3,14 × ${f(r*r)} × ${f(t)} = <b>${f(v)} cm³</b></div>
+    <div class="f"><small>Luas Permukaan (π × r × (r + s))</small>3,14 × ${f(r)} × (${f(r)}+${f(s)}) = <b>${f(lp)} cm²</b></div>`;
+  }else if(m=='find_t'){
+    const v=+$('#i_v').value||0,r=+$('#i_r').value||0,la=3.14*r*r,t=(3*v)/(la||1);
+    html=`<div class="f"><small>Tinggi Kerucut (t = (3 × Volume) ÷ (π × r²))</small>(3 × ${f(v)}) ÷ ${f(la)} = <b>${f(t)} cm</b></div>`;
+  }else{
+    const v=+$('#i_v').value||0,t=+$('#i_t').value||0,r=Math.sqrt((3*v)/(3.14*t||1));
+    html=`<div class="f"><small>Jari-Jari Alas (r = √((3 × Volume) ÷ (π × t)))</small>√((3 × ${f(v)}) ÷ (3,14 × ${f(t)})) = <b>${f(r)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
+
+function calcBl(){
+  const m=$('#k_mode').value;let html='';
+  if(m=='std'){
+    const r=+$('#i_r').value||0,v=(4/3)*3.14*(r**3),lp=4*3.14*r*r;
+    html=`<div class="f"><small>Luas Permukaan (4 × π × r²)</small>4 × 3,14 × ${f(r*r)} = <b>${f(lp)} cm²</b></div>
+    <div class="f"><small>Volume (⁴⁄₃ × π × r³)</small>⁴⁄₃ × 3,14 × ${f(r**3)} = <b>${f(v)} cm³</b></div>`;
+  }else if(m=='find_rv'){
+    const v=+$('#i_v').value||0,r=Math.cbrt((3*v)/(4*3.14));
+    html=`<div class="f"><small>Jari-Jari Bola (r = ∛((3 × Volume) ÷ (4 × π)))</small>∛((3 × ${f(v)}) ÷ 12,56) = <b>${f(r)} cm</b></div>`;
+  }else{
+    const lp=+$('#i_lp').value||0,r=Math.sqrt(lp/(4*3.14));
+    html=`<div class="f"><small>Jari-Jari Bola (r = √(LP ÷ (4 × π)))</small>√(${f(lp)} ÷ 12,56) = <b>${f(r)} cm</b></div>`;
+  }
+  $('#res').innerHTML=html;
+}
 
 (function lp(){requestAnimationFrame(lp);if(!R||!cur)return;
   if(T!=tg){T+=Math.sign(tg-T)*Math.min(.012,Math.abs(tg-T));$('#sl').value=T*100}
   cur.set(T);inner.position.y=-cur.H*T/2;if(spin&&!drag)root.rotation.y+=.006;R.render(sc,cam)})();
 
-/* ===== Musik (WebAudio, melodi orisinal) ===== */
+/* ===== AUDIO BACKSOUND ===== */
 let ac,mg,mOn=false,mT,nextT=0;
 const MEL=[[64,.5],[67,.5],[72,1],[67,1],[64,1],[69,.5],[72,.5],[76,1],[72,1],[69,1],[65,.5],[69,.5],[72,1],[69,1],[65,1],[67,.5],[71,.5],[74,1],[71,1],[67,1],[72,.5],[71,.5],[72,1],[76,1],[72,1],[69,.5],[67,.5],[69,1],[72,1],[69,1],[65,.5],[67,.5],[69,1],[72,1],[74,1],[74,.5],[72,.5],[71,1],[67,2]];
 const BAS=[[48,2],[55,2],[45,2],[52,2],[41,2],[48,2],[43,2],[50,2]];
@@ -265,28 +722,296 @@ function setMus(on){mOn=on;$('#mus').textContent=on?'🎵':'🔇';
 function toggleMus(){setMus(!mOn)}
 addEventListener('click',e=>{if(!ac&&!e.target.closest('#mus'))setMus(true)});
 
-/* ===== Kuis ===== */
-const Q=[
-['Kubus punya berapa sisi?',['4','6','8','12'],1],
-['Berapa banyak rusuk kubus?',['6','8','12','16'],2],
-['Rumus volume kubus adalah ...',['s × s','s × s × s','6 × s × s','4 × s'],1],
-['Bangun ruang yang TIDAK punya titik sudut adalah ...',['Kubus','Limas','Tabung','Prisma'],2],
-['Sisi tegak limas segiempat berbentuk ...',['Persegi','Segitiga','Lingkaran','Trapesium'],1],
-['Volume kubus dengan rusuk 4 cm adalah ... cm³',['16','48','64','96'],2],
-['Balok p = 5 cm, l = 3 cm, t = 2 cm. Volumenya ... cm³',['10','30','15','60'],1],
-['Selimut tabung jika dibuka berbentuk ...',['Segitiga','Lingkaran','Persegi panjang','Juring'],2],
-['Jaring-jaring kerucut terdiri dari lingkaran dan ...',['Juring','Persegi panjang','Segitiga','Trapesium'],0],
-['Luas permukaan kubus dengan rusuk 5 cm adalah ... cm²',['25','100','125','150'],3]];
-let qi,sk;
-function startQ(){qi=sk=0;showQ()}
+/* ===== BANK SOAL ===== */
+const NM={kubus:'Kubus',balok:'Balok',prisma:'Prisma Segitiga',limas:'Limas Segiempat',tabung:'Tabung',kerucut:'Kerucut',bola:'Bola'};
+const KC={kubus:'#3b82f6',balok:'#f59e0b',prisma:'#ec4899',limas:'#8b5cf6',tabung:'#06b6d4',kerucut:'#22c55e',bola:'#ef4444'};
+const sh=a=>{for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),pick1=a=>a[Math.floor(Math.random()*a.length)];
+
+function ico(k){const c=KC[k],P=(p,s)=>`<polygon points="${p}" fill="${c}"/><polygon points="${p}" fill="${s>0?'#fff':'#000'}" fill-opacity="${Math.abs(s)}"/>`;
+ const B={kubus:P("50,8 90,28 50,48 10,28",.35)+P("10,28 50,48 50,92 10,72",0)+P("50,48 90,28 90,72 50,92",-.3),
+ balok:P("10,36 30,18 90,18 70,36",.35)+P("10,36 70,36 70,86 10,86",0)+P("70,36 90,18 90,68 70,86",-.3),
+ prisma:P("52,84 32,40 66,18 86,62",-.3)+P("12,84 32,40 66,18 46,62",.25)+P("12,84 52,84 32,40",0),
+ limas:P("14,70 60,86 50,10",.1)+P("60,86 92,62 50,10",-.3),
+ tabung:`<path d="M18 22V80A32 10 0 0 0 82 80V22Z" fill="${c}"/><ellipse cx="50" cy="22" rx="32" ry="10" fill="${c}"/><ellipse cx="50" cy="22" rx="32" ry="10" fill="#fff" fill-opacity=".35"/>`,
+ kerucut:`<path d="M50 8L18 78A32 12 0 0 0 82 78Z" fill="${c}"/><path d="M50 8L18 78A32 12 0 0 0 50 90Z" fill="#fff" fill-opacity=".25"/>`,
+ bola:`<defs><radialGradient id="gb" cx=".35" cy=".3"><stop offset="0" stop-color="#fff"/><stop offset="1" stop-color="${c}"/></radialGradient></defs><circle cx="50" cy="50" r="40" fill="url(#gb)"/>`};
+ return`<svg viewBox="0 0 100 100" width="120" height="120">${B[k]}</svg>`}
+
+function mkQ(q,c,w,img){const o=sh([c,...w]);return{q,img:img||'',o,a:o.indexOf(c)}}
+function numQ(q,c,ds,u){const s=new Set([c]);ds.forEach(d=>{if(d>0)s.add(+d.toFixed(2))});let k=1;while(s.size<4){s.add(+(c+k*2).toFixed(2));k++}
+  const a=[...s];return mkQ(q,f(a[0])+' '+u,a.slice(1,4).map(x=>f(x)+' '+u))}
+
+const ST=`Kubus punya berapa sisi?|6|4|8|12
+Berapa banyak rusuk kubus?|12|6|8|16
+Kubus punya berapa titik sudut?|8|6|12|4
+Rumus volume kubus adalah ...|s × s × s|s × s|6 × s × s|4 × s
+Rumus luas permukaan kubus adalah ...|6 × s × s|s × s × s|4 × s × s|12 × s
+Bangun ruang yang TIDAK punya titik sudut adalah ...|Tabung|Kubus|Limas|Prisma
+Sisi tegak limas segiempat berbentuk ...|Segitiga|Persegi|Lingkaran|Trapesium
+Selimut tabung jika dibuka berbentuk ...|Persegi panjang|Segitiga|Lingkaran|Juring
+Jaring-jaring kerucut terdiri dari lingkaran dan ...|Juring|Persegi panjang|Segitiga|Trapesium
+Balok memiliki berapa rusuk?|12|8|6|10
+Prisma segitiga memiliki berapa sisi?|5|4|6|3
+Limas segiempat memiliki berapa titik sudut?|5|4|6|8
+Ada berapa pola jaring-jaring kubus yang berbeda?|11|6|8|12
+Garis pelukis kerucut dihitung dengan rumus ...|s = √(r² + t²)|s = r + t|s = r × t|s = r² + t²`.split('\n').map(l=>l.split('|'));
+
+const GV=[
+()=>{const k=sh(Object.keys(KC)).slice(0,4),c=k[0];return mkQ('Gambar bangun ruang di atas adalah ...',NM[c],k.slice(1).map(x=>NM[x]),ico(c))},
+()=>{const k=sh(Object.keys(KC)).slice(0,4),c=k[0];return mkQ('Perhatikan gambar. Bangun ruang ini bernama ...',NM[c],k.slice(1).map(x=>NM[x]),ico(c))}
+];
+
+const GD=[
+()=>{const s=ri(2,8);return numQ(`Volume kubus dengan rusuk ${s} cm adalah ...`,s**3,[s*s,3*s,6*s*s],'cm³')},
+()=>{const p=ri(3,8),l=ri(2,5),t=ri(2,5);return numQ(`Balok berukuran p = ${p} cm, l = ${l} cm, t = ${t} cm. Volumenya ...`,p*l*t,[p+l+t,2*(p*l+p*t+l*t)],'cm³')},
+()=>{const r=ri(2,7),t=ri(2,8);return numQ(`Tabung berjari-jari ${r} cm dan tinggi ${t} cm. Volumenya (π = 3,14) ...`,3.14*r*r*t,[3.14*r*t,2*3.14*r*t],'cm³')}
+];
+
+function buildQs(n){
+  const out=[],seen=new Set(),add=x=>{const k=x.q+x.o[x.a]+x.img.length;if(seen.has(k))return 0;seen.add(k);out.push(x);return 1};
+  let g=0;while(out.length<4&&g++<60)add(pick1(GV)());
+  while(out.length<n&&g++<300){const r=Math.random();add(r<.4?(a=>mkQ(a[0],a[1],a.slice(2)))(pick1(ST)):r<.85?pick1(GD)():pick1(GV)())}
+  return sh(out);
+}
+
+/* ===== KUIS SOLO ===== */
+let qs,qi,sk;
+function startQ(){qs=buildQs(10);qi=sk=0;showQ()}
 function showQ(){
-  if(qi>=Q.length){const st=sk>=9?'⭐⭐⭐':sk>=6?'⭐⭐':'⭐';
-    $('#qbox').innerHTML=`<div style="text-align:center"><div style="font-size:4rem">🏆</div><h2>Skormu ${sk*10} / 100</h2><div style="font-size:2rem">${st}</div><p>${sk>=9?'Luar biasa, kamu jagoan bangun ruang!':sk>=6?'Bagus sekali! Sedikit lagi sempurna.':'Ayo belajar lagi di menu MATERI, lalu coba lagi!'}</p>
+  if(qi>=qs.length){const st=sk>=9?'⭐⭐⭐':sk>=6?'⭐⭐':'⭐';
+    $('#qbox').innerHTML=`<div style="text-align:center"><div class="troph">🏆</div><h2>Skormu ${sk*10} / 100</h2><div style="font-size:2rem">${st}</div><p>${sk>=9?'Luar biasa, kamu jagoan bangun ruang!':sk>=6?'Bagus sekali! Sedikit lagi sempurna.':'Ayo belajar lagi di menu MATERI, lalu coba lagi!'}</p>
     <button class="btn b2" onclick="startQ()">Main Lagi</button><button class="btn b1" onclick="go('mat')">Ke Materi</button></div>`;return}
-  const q=Q[qi];
-  $('#qbox').innerHTML=`<b>Soal ${qi+1} dari ${Q.length} · Skor ${sk*10}</b><h2 style="margin:6px 0">${q[0]}</h2>`+
-   q[1].map((o,i)=>`<button class="btn opt b1" onclick="ans(${i},this)">${'ABCD'[i]}. ${o}</button>`).join('')+'<div id="fb"></div>'}
-function ans(i,el){const q=Q[qi],ok=i==q[2];if(ok)sk++;
-  document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(j==q[2])b.className='btn opt b2';else if(b==el)b.className='btn opt b4'});
-  $('#fb').innerHTML=`<h3>${ok?'🎉 Hebat, jawabanmu benar!':'😅 Belum tepat. Jawabannya: '+q[1][q[2]]}</h3><button class="btn b3" onclick="qi++;showQ()">NEXT ➡</button>`}
+  const q=qs[qi];
+  $('#qbox').innerHTML=`<b>Soal ${qi+1} dari ${qs.length} · Skor ${sk*10}</b><h2 style="margin:6px 0">${q.q}</h2><div class="ic">${q.img}</div>`+
+   q.o.map((o,i)=>`<button class="btn opt b1" onclick="ans(${i},this)">${'ABCD'[i]}. ${o}</button>`).join('')+'<div id="fb"></div>'}
+function ans(i,el){const q=qs[qi],ok=i==q.a;if(ok)sk++;
+  document.querySelectorAll('.opt').forEach((b,j)=>{b.disabled=true;if(j==q.a)b.className='btn opt b2';else if(b==el)b.className='btn opt b4'});
+  $('#fb').innerHTML=`<h3>${ok?'🎉 Hebat, jawabanmu benar!':'😅 Belum tepat. Jawabannya: '+q.o[q.a]}</h3><button class="btn b3" onclick="qi++;showQ()">NEXT ➡</button>`}
+
+/* ===== MODE TANDING DUO JUARA ===== */
+const KEYS=[['A','S','D','F'],['J','K','L',';']],TL=15;
+function startVS(){
+  const p1=$('#p1_name').value.trim()||'Pemain 1';
+  const p2=$('#p2_name').value.trim()||'Pemain 2';
+  const r=parseInt($('#vs_rounds').value)||10;
+  
+  $('#label_p1').textContent=p1;$('#label_p2').textContent=p2;
+  $('#box_p1').innerHTML=`🔴 ${p1.toUpperCase()}`;$('#box_p2').innerHTML=`🔵 ${p2.toUpperCase()}`;
+  
+  go('vs');$('#vsgame').classList.remove('hide');$('#vsend').classList.add('hide');
+  vs={qs:buildQs(r),i:0,s:[0,0],c:[0,0],lock:[0,0],done:0,t0:0,tm:null,p1,p2};
+  vsShow();
+}
+
+function vsHead(){
+  const a=vs.s[0],b=vs.s[1],t=a+b,p=t?a/t*100:50;
+  $('#sc0').textContent=a;$('#sc1').textContent=b;
+  $('#m0').style.width=p+'%';$('#m1').style.width=(100-p)+'%';
+  $('#m0').textContent=t?a:'';$('#m1').textContent=t?b:'';
+}
+
+function vsShow(){
+  if(vs.i>=vs.qs.length)return vsEnd();
+  const q=vs.qs[vs.i];vs.lock=[0,0];vs.done=0;
+  $('#vq').innerHTML=`<b>Soal ${vs.i+1} dari ${vs.qs.length}</b><h2 style="margin:4px 0">${q.q}</h2><div class="ic">${q.img}</div><div id="vf" style="font-weight:800;min-height:1.6em"></div><div class="tb"><i id="tbar"></i></div>`;
+  [0,1].forEach(p=>$('#vp'+p).innerHTML=q.o.map((o,i)=>`<button class="btn opt ${p?'b1':'b4'}" id="v${p}_${i}" onclick="vsAns(${p},${i})">${KEYS[p][i]}. ${o}</button>`).join(''));
+  vsHead();clearInterval(vs.tm);vs.t0=Date.now();
+  vs.tm=setInterval(()=>{const l=TL-(Date.now()-vs.t0)/1000;const b=$('#tbar');if(b)b.style.width=Math.max(l,0)/TL*100+'%';if(l<=0)vsRes(-1,0)},100);
+}
+
+function vsAns(p,i){
+  if(!vs||vs.stop||vs.done||vs.lock[p]||!vs.qs[vs.i]||i>=vs.qs[vs.i].o.length)return;
+  const q=vs.qs[vs.i],el=$('#v'+p+'_'+i);
+  const name=p===0?vs.p1:vs.p2;
+  if(i==q.a){
+    const l=Math.max(0,TL-(Date.now()-vs.t0)/1000),pts=10+Math.floor(l/3);
+    vs.s[p]+=pts;vs.c[p]++;el.classList.add('ok');vsRes(p,pts);
+  }else{
+    vs.lock[p]=1;el.classList.add('bad');$('#vp'+p).querySelectorAll('button').forEach(b=>b.disabled=true);
+    $('#vf').textContent=name+' salah, menunggu lawan...';if(vs.lock[0]&&vs.lock[1])vsRes(-1,0);
+  }
+}
+
+function vsRes(w,pts){
+  if(vs.done)return;vs.done=1;clearInterval(vs.tm);const q=vs.qs[vs.i];
+  [0,1].forEach(p=>$('#vp'+p).querySelectorAll('button').forEach((b,j)=>{b.disabled=true;if(j==q.a)b.classList.add('ok')}));
+  const winName=w===0?vs.p1:w===1?vs.p2:'';
+  $('#vf').textContent=w>=0?`🎉 ${winName} lebih cepat dan benar! +${pts} poin`:'😅 Belum ada yang tepat. Jawabannya: '+q.o[q.a];
+  vsHead();const me=vs;setTimeout(()=>{if(vs!==me||me.stop)return;me.i++;vsShow()},2300);
+}
+
+function vsEnd(){
+  clearInterval(vs.tm);const[a,b]=vs.s,w=a>b?0:b>a?1:-1,st=c=>c>=8?'⭐⭐⭐':c>=5?'⭐⭐':'⭐';
+  $('#vsgame').classList.add('hide');const e=$('#vsend');e.classList.remove('hide');
+  const winTitle=w<0?'Seri! Sama-Sama Hebat! 🤝':`🎉 ${w===0?vs.p1:vs.p2} Menang!`;
+  e.innerHTML=`<div class="troph">🏆</div><h1 style="margin:0;color:${w<0?'#9b51e0':w===1?'#2f80ed':'#eb5757'}">${winTitle}</h1>
+   <div class="sc2" style="margin:12px 0">
+     <div style="background:#eb5757">🔴 ${vs.p1}<br><span style="font-size:2rem">${a}</span> poin<br>Benar: ${vs.c[0]}/${vs.qs.length}<br>${st(vs.c[0])}</div>
+     <div style="background:#2f80ed">🔵 ${vs.p2}<br><span style="font-size:2rem">${b}</span> poin<br>Benar: ${vs.c[1]}/${vs.qs.length}<br>${st(vs.c[1])}</div>
+   </div>
+   <button class="btn b2" onclick="go('vs_setup')">Main Lagi</button><button class="btn b1" onclick="go('home')">Ke Menu</button>`;
+}
+
+addEventListener('keydown',e=>{if(!vs||vs.stop||$('#vs').classList.contains('hide'))return;const k=e.key.toUpperCase();[0,1].forEach(p=>{const i=KEYS[p].indexOf(k);if(i>=0)vsAns(p,i)})});
+
+/* ===== POJOK GAME WORDWALL (GAME KERANJANG 2 MENIT) ===== */
+function initCatcherGame(){
+  const box=$('#ww_box');
+  box.innerHTML=`
+    <div style="text-align:center">
+      <div style="display:flex;justify-content:space-between;font-weight:800;font-size:1.2rem;margin-bottom:8px">
+        <span>⏱️ Sisa Waktu: <b id="c_time" style="color:#e84118">120</b> Detik</span>
+        <span>⭐ Skor: <b id="c_score" style="color:#27ae60">0</b></span>
+      </div>
+      <div id="c_target" style="background:#ffeaa7;border:3px solid #fdcb6e;border-radius:14px;padding:8px;font-weight:800;font-size:1.2rem;color:#d63031;margin-bottom:8px">Target: Tangkap Bangun Ruang yang Memiliki Puncak!</div>
+      <canvas id="catcherCanvas"></canvas>
+      <div style="margin-top:8px;font-weight:700;color:#555">Gunakan Sentuhan Jari di Layar atau Panah Kiri-Kanan Keyboard untuk Menggeser Keranjang!</div>
+    </div>`;
+
+  const canvas=$('#catcherCanvas');const ctx=canvas.getContext('2d');
+  canvas.width=canvas.parentElement.clientWidth-10;canvas.height=360;
+
+  const targets=[
+    {txt:'Tangkap Bangun yang Memiliki Puncak!',check:type=>['limas','kerucut'].includes(type)},
+    {txt:'Tangkap Bangun yang Memiliki Sisi Lengkung!',check:type=>['tabung','kerucut','bola'].includes(type)},
+    {txt:'Tangkap Bangun yang Memiliki 6 Sisi Persegi!',check:type=>['kubus'].includes(type)},
+    {txt:'Tangkap Bangun yang Tidak Punya Titik Sudut!',check:type=>['tabung','bola'].includes(type)}
+  ];
+
+  let currentTarget=targets[0];
+  let score=0, timeLeft=120, gameOver=false;
+  let basket={x:canvas.width/2 - 60, w:120, h:28};
+  let items=[];
+
+  const types=[
+    {id:'kubus',name:'Kubus',col:'#3b82f6'},
+    {id:'balok',name:'Balok',col:'#f59e0b'},
+    {id:'limas',name:'Limas',col:'#8b5cf6'},
+    {id:'kerucut',name:'Kerucut',col:'#22c55e'},
+    {id:'tabung',name:'Tabung',col:'#06b6d4'},
+    {id:'bola',name:'Bola',col:'#ef4444'}
+  ];
+
+  function spawnItem(){
+    if(gameOver)return;
+    const type=pick1(types);
+    items.push({
+      x: Math.random()*(canvas.width - 80) + 40,
+      y: -35,
+      speed: 1.1 + Math.random()*0.6, // Kecepatan pelan & tenang untuk anak SD
+      type: type
+    });
+  }
+
+  let spawnTimer = setInterval(spawnItem, 1600);
+  let gameTimer = setInterval(()=>{
+    if(gameOver)return;
+    timeLeft--;
+    $('#c_time').textContent=timeLeft;
+    if(timeLeft%30===0){
+      currentTarget=pick1(targets);
+      $('#c_target').textContent='Target: '+currentTarget.txt;
+    }
+    if(timeLeft<=0){
+      endGame();
+    }
+  }, 1000);
+
+  function endGame(){
+    gameOver=true;
+    clearInterval(spawnTimer);clearInterval(gameTimer);
+    if(catcherLoopId){cancelAnimationFrame(catcherLoopId);catcherLoopId=null;}
+    box.innerHTML=`
+      <div style="text-align:center;padding:20px">
+        <div class="troph">🏆</div>
+        <h2>Waktu 2 Menit Selesai!</h2>
+        <h1>Skor Akhirmu: ${score}</h1>
+        <p>${score>=100?'Luar Biasa! Kamu Sangat Cepat & Cermat! 🎉':score>=50?'Bagus Sekali! Ayo Main Lagi! 🌟':'Hebat! Terus Berlatih Ya! 💪'}</p>
+        <button class="btn b2" onclick="initCatcherGame()">Main Lagi 🔄</button>
+        <button class="btn b1" onclick="go('home')">Ke Menu Utama 🏠</button>
+      </div>`;
+  }
+
+  function update(){
+    if(gameOver)return;
+    for(let i=items.length-1;i>=0;i--){
+      let it=items[i];
+      it.y += it.speed;
+
+      // Collision Check dengan keranjang
+      if(it.y + 25 >= canvas.height - basket.h && it.y <= canvas.height && it.x >= basket.x - 20 && it.x <= basket.x + basket.w + 20){
+        if(currentTarget.check(it.type.id)){
+          score += 10;
+          $('#c_score').textContent=score;
+        }else{
+          score = Math.max(0, score - 5);
+          $('#c_score').textContent=score;
+        }
+        items.splice(i,1);
+        continue;
+      }
+
+      // Hapus jika keluar batas bawah
+      if(it.y > canvas.height + 40){
+        items.splice(i,1);
+      }
+    }
+  }
+
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+
+    // Draw Basket (Keranjang)
+    ctx.fillStyle='#8a5526';
+    ctx.beginPath();
+    ctx.roundRect(basket.x, canvas.height - basket.h, basket.w, basket.h, 10);
+    ctx.fill();
+    ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+
+    ctx.fillStyle='#fff';
+    ctx.font='800 16px "Baloo 2", sans-serif';
+    ctx.textAlign='center';
+    ctx.fillText('🧺 KERANJANG', basket.x + basket.w/2, canvas.height - 8);
+
+    // Draw Falling Objects (Jelas & Tidak Buram)
+    items.forEach(it=>{
+      ctx.fillStyle=it.type.col;
+      ctx.beginPath();
+      ctx.arc(it.x, it.y, 24, 0, Math.PI*2);
+      ctx.fill();
+      ctx.strokeStyle='#fff';ctx.lineWidth=3;ctx.stroke();
+
+      ctx.fillStyle='#fff';
+      ctx.font='800 13px "Baloo 2", sans-serif';
+      ctx.textAlign='center';
+      ctx.fillText(it.type.name, it.x, it.y + 4);
+    });
+  }
+
+  function loop(){
+    update();
+    draw();
+    if(!gameOver){
+      catcherLoopId=requestAnimationFrame(loop);
+    }
+  }
+
+  // Input Handlers (Touch & Mouse & Keyboard)
+  function moveBasket(clientX){
+    const rect = canvas.getBoundingClientRect();
+    const x = clientX - rect.left - basket.w/2;
+    basket.x = Math.max(0, Math.min(canvas.width - basket.w, x));
+  }
+
+  canvas.onpointermove = e => { if(e.buttons === 1 || e.pointerType==='touch') moveBasket(e.clientX); };
+  canvas.onpointerdown = e => moveBasket(e.clientX);
+
+  window.onkeydown = e => {
+    if(e.key==='ArrowLeft') basket.x = Math.max(0, basket.x - 25);
+    if(e.key==='ArrowRight') basket.x = Math.min(canvas.width - basket.w, basket.x + 25);
+  };
+
+  loop();
+}
 </script></body></html>
